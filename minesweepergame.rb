@@ -1,7 +1,17 @@
 require 'byebug'
+require 'yaml'
+require_relative './board'
+require_relative './tile'
+
 BOARD_SIZE = 9
+
 class MinesweeperGame
+  def self.load_game(filename)
+    YAML::load(File.read(filename)).run_game
+  end
+
   attr_reader :board
+
   def initialize(num_bombs = 9)
     @board = Board.new(num_bombs)
   end
@@ -11,6 +21,7 @@ class MinesweeperGame
     until game_over?
       display_board
       move, flag = get_move_from_player
+      return if move.nil? #user has chosen to save and quit
       process_move(move, flag)
     end
     reveal_board
@@ -19,8 +30,15 @@ class MinesweeperGame
   end
 
   def get_move_from_player
-    puts "press f if you would like to flag/unflag a tile, or any key to continue."
-    flag = (gets.chomp.downcase[0] == 'f')
+    puts "press f if you would like to flag/unflag a tile, s to save and " +
+         "quit, or any key to continue."
+    user_input = gets.chomp.downcase
+    if user_input[0] == 's'
+      request_filename_and_save
+      return [nil, nil]
+    end
+    flag = (user_input[0] == 'f')
+
     while true
       puts "choose a tile: "
       input = gets.chomp
@@ -69,7 +87,6 @@ class MinesweeperGame
     end
   end
 
-
   def game_over?
     game_won? || game_lost?
   end
@@ -101,128 +118,28 @@ class MinesweeperGame
   def reveal_board
     @board.reveal_board
   end
-end
 
-class Board
-  attr_reader :tiles
-  def initialize(num_bombs = 9)
-    @num_bombs = num_bombs
-    create_tiles #sets @tiles variable
+  def request_filename_and_save
+    puts "please name the file where you would like to save, or enter " +
+         "for default."
+    user_filename = gets.chomp
+    filename = user_filename == "" ? "minesweeper.yml" : user_filename
+    save_game(filename)
   end
 
-  def create_tiles
-    bomb_tile_numbers = select_bombs
-    @tiles = []
-    BOARD_SIZE.times do |idx1|
-      BOARD_SIZE.times do |idx2|
-        bomb = bomb_tile_numbers.include?(BOARD_SIZE*idx1 + idx2)
-        @tiles << Tile.new([idx1, idx2], bomb)
-      end
+  def save_game(filename)
+    File.open(filename, 'w') do |f|
+      f.puts self.to_yaml
     end
-  end
-
-  def select_bombs
-    (0...(BOARD_SIZE**2)).to_a.sample(@num_bombs)
-  end
-
-  def [](position)
-    @tiles.select do |tile|
-      tile.position == [position[0], position[1]]
-    end[0]
-  end
-
-  def create_display
-    display_string = ""
-    BOARD_SIZE.times do |idx1|
-      BOARD_SIZE.times do |idx2|
-        display_string += self[[idx1,idx2]].display + ' '
-      end
-      display_string += "\n"
-    end
-    display_string.strip
-  end
-
-  def bomb_revealed?
-    @tiles.any? { |tile| tile.bomb? && tile.revealed? }
-  end
-
-  def won?
-    revealed = @tiles.count { |tile| tile.revealed? && !tile.bomb? }
-    revealed == (BOARD_SIZE ** 2) - @num_bombs
-  end
-
-  def reveal_board
-    @tiles.each { |tile| tile.reveal if tile.bomb? }
-  end
-end
-
-class Tile
-  @@tiles = {}
-  def self.tiles
-    @@tiles
-  end
-  attr_reader :display, :position, :neighbors
-  NEIGHBOR_PERMS = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1],
-                    [1, 0], [1, 1]]
-
-  def initialize(position, bomb = false)
-    @explored = false
-    @bomb = bomb
-    @display = '*'
-    @position = position
-    @neighbors = []
-    @revealed = false
-    @@tiles[@position] = self
-  end
-
-  def reveal
-    @revealed = true
-    if @bomb
-      @display = "X"
-    else
-      find_neighbors if @neighbors.empty?
-      n_bombs = count_bombs
-      @display = n_bombs > 0 ? n_bombs.to_s : "_"
-    end
-  end
-
-  def find_neighbors
-    NEIGHBOR_PERMS.each do |perm|
-      possible_position = calculate_position(perm)
-      @neighbors << @@tiles[possible_position] if
-                    valid_position?(possible_position)
-    end
-  end
-
-  def valid_position?(arr)
-    arr.all? {|value| value.between?(0, BOARD_SIZE-1)}
-  end
-
-  def calculate_position(perm)
-    [@position[0] + perm[0], @position[1] + perm[1]]
-  end
-
-  def toggle_flag
-    @display = (@display == "F") ? "*" : "F"
-  end
-
-  def flagged?
-    @display == "F"
-  end
-
-  def revealed?
-    @revealed
-  end
-
-  def bomb?
-    @bomb
-  end
-
-  def count_bombs
-    @neighbors.inject(0) { |memo, neighbor| neighbor.bomb? ? memo + 1 : memo }
   end
 end
 
 if __FILE__ == $PROGRAM_NAME
-  MinesweeperGame.new(9).run_game
+  puts "Would you like to load a previous game? (y/n)"
+  if gets.chomp[0].downcase == 'y'
+    puts "what is the filename?"
+    MinesweeperGame.load_game(gets.strip)
+  else
+    MinesweeperGame.new(9).run_game
+  end
 end

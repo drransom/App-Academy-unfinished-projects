@@ -1,0 +1,960 @@
+--- !ruby/object:MinesweeperGame
+board: !ruby/object:Board
+  num_bombs: 9
+  tiles:
+  - &1 !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: _
+    position:
+    - 0
+    - 0
+    neighbors:
+    - &2 !ruby/object:Tile
+      explored: false
+      bomb: false
+      display: _
+      position:
+      - 0
+      - 1
+      neighbors:
+      - *1
+      - &3 !ruby/object:Tile
+        explored: false
+        bomb: false
+        display: _
+        position:
+        - 0
+        - 2
+        neighbors:
+        - *2
+        - &4 !ruby/object:Tile
+          explored: false
+          bomb: false
+          display: '1'
+          position:
+          - 0
+          - 3
+          neighbors:
+          - *3
+          - &9 !ruby/object:Tile
+            explored: false
+            bomb: false
+            display: "*"
+            position:
+            - 0
+            - 4
+            neighbors: []
+            revealed: false
+          - &7 !ruby/object:Tile
+            explored: false
+            bomb: false
+            display: _
+            position:
+            - 1
+            - 2
+            neighbors:
+            - *2
+            - *3
+            - *4
+            - &5 !ruby/object:Tile
+              explored: false
+              bomb: false
+              display: _
+              position:
+              - 1
+              - 1
+              neighbors:
+              - *1
+              - *2
+              - *3
+              - &6 !ruby/object:Tile
+                explored: false
+                bomb: false
+                display: _
+                position:
+                - 1
+                - 0
+                neighbors:
+                - *1
+                - *2
+                - *5
+                - &8 !ruby/object:Tile
+                  explored: false
+                  bomb: false
+                  display: '1'
+                  position:
+                  - 2
+                  - 0
+                  neighbors:
+                  - *6
+                  - *5
+                  - &13 !ruby/object:Tile
+                    explored: false
+                    bomb: false
+                    display: '1'
+                    position:
+                    - 2
+                    - 1
+                    neighbors:
+                    - *6
+                    - *5
+                    - *7
+                    - *8
+                    - &10 !ruby/object:Tile
+                      explored: false
+                      bomb: false
+                      display: _
+                      position:
+                      - 2
+                      - 2
+                      neighbors:
+                      - *5
+                      - *7
+                      - &11 !ruby/object:Tile
+                        explored: false
+                        bomb: false
+                        display: '1'
+                        position:
+                        - 1
+                        - 3
+                        neighbors:
+                        - *3
+                        - *4
+                        - *9
+                        - *7
+                        - &12 !ruby/object:Tile
+                          explored: false
+                          bomb: true
+                          display: "*"
+                          position:
+                          - 1
+                          - 4
+                          neighbors: []
+                          revealed: false
+                        - *10
+                        - &14 !ruby/object:Tile
+                          explored: false
+                          bomb: false
+                          display: '1'
+                          position:
+                          - 2
+                          - 3
+                          neighbors:
+                          - *7
+                          - *11
+                          - *12
+                          - *10
+                          - &19 !ruby/object:Tile
+                            explored: false
+                            bomb: false
+                            display: "*"
+                            position:
+                            - 2
+                            - 4
+                            neighbors: []
+                            revealed: false
+                          - &15 !ruby/object:Tile
+                            explored: false
+                            bomb: false
+                            display: _
+                            position:
+                            - 3
+                            - 2
+                            neighbors:
+                            - *13
+                            - *10
+                            - *14
+                            - &17 !ruby/object:Tile
+                              explored: false
+                              bomb: false
+                              display: '2'
+                              position:
+                              - 3
+                              - 1
+                              neighbors:
+                              - *8
+                              - *13
+                              - *10
+                              - &16 !ruby/object:Tile
+                                explored: false
+                                bomb: true
+                                display: "*"
+                                position:
+                                - 3
+                                - 0
+                                neighbors: []
+                                revealed: false
+                              - *15
+                              - &18 !ruby/object:Tile
+                                explored: false
+                                bomb: true
+                                display: "*"
+                                position:
+                                - 4
+                                - 0
+                                neighbors: []
+                                revealed: false
+                              - &23 !ruby/object:Tile
+                                explored: false
+                                bomb: false
+                                display: '2'
+                                position:
+                                - 4
+                                - 1
+                                neighbors:
+                                - *16
+                                - *17
+                                - *15
+                                - *18
+                                - &20 !ruby/object:Tile
+                                  explored: false
+                                  bomb: false
+                                  display: _
+                                  position:
+                                  - 4
+                                  - 2
+                                  neighbors:
+                                  - *17
+                                  - *15
+                                  - &21 !ruby/object:Tile
+                                    explored: false
+                                    bomb: false
+                                    display: '1'
+                                    position:
+                                    - 3
+                                    - 3
+                                    neighbors:
+                                    - *10
+                                    - *14
+                                    - *19
+                                    - *15
+                                    - &22 !ruby/object:Tile
+                                      explored: false
+                                      bomb: false
+                                      display: "*"
+                                      position:
+                                      - 3
+                                      - 4
+                                      neighbors: []
+                                      revealed: false
+                                    - *20
+                                    - &24 !ruby/object:Tile
+                                      explored: false
+                                      bomb: false
+                                      display: '1'
+                                      position:
+                                      - 4
+                                      - 3
+                                      neighbors:
+                                      - *15
+                                      - *21
+                                      - *22
+                                      - *20
+                                      - &29 !ruby/object:Tile
+                                        explored: false
+                                        bomb: true
+                                        display: "*"
+                                        position:
+                                        - 4
+                                        - 4
+                                        neighbors: []
+                                        revealed: false
+                                      - &25 !ruby/object:Tile
+                                        explored: false
+                                        bomb: false
+                                        display: _
+                                        position:
+                                        - 5
+                                        - 2
+                                        neighbors:
+                                        - *23
+                                        - *20
+                                        - *24
+                                        - &27 !ruby/object:Tile
+                                          explored: false
+                                          bomb: false
+                                          display: '2'
+                                          position:
+                                          - 5
+                                          - 1
+                                          neighbors:
+                                          - *18
+                                          - *23
+                                          - *20
+                                          - &26 !ruby/object:Tile
+                                            explored: false
+                                            bomb: false
+                                            display: "*"
+                                            position:
+                                            - 5
+                                            - 0
+                                            neighbors: []
+                                            revealed: false
+                                          - *25
+                                          - &28 !ruby/object:Tile
+                                            explored: false
+                                            bomb: true
+                                            display: "*"
+                                            position:
+                                            - 6
+                                            - 0
+                                            neighbors: []
+                                            revealed: false
+                                          - &33 !ruby/object:Tile
+                                            explored: false
+                                            bomb: false
+                                            display: '1'
+                                            position:
+                                            - 6
+                                            - 1
+                                            neighbors:
+                                            - *26
+                                            - *27
+                                            - *25
+                                            - *28
+                                            - &30 !ruby/object:Tile
+                                              explored: false
+                                              bomb: false
+                                              display: _
+                                              position:
+                                              - 6
+                                              - 2
+                                              neighbors:
+                                              - *27
+                                              - *25
+                                              - &31 !ruby/object:Tile
+                                                explored: false
+                                                bomb: false
+                                                display: '1'
+                                                position:
+                                                - 5
+                                                - 3
+                                                neighbors:
+                                                - *20
+                                                - *24
+                                                - *29
+                                                - *25
+                                                - &32 !ruby/object:Tile
+                                                  explored: false
+                                                  bomb: false
+                                                  display: "*"
+                                                  position:
+                                                  - 5
+                                                  - 4
+                                                  neighbors: []
+                                                  revealed: false
+                                                - *30
+                                                - &34 !ruby/object:Tile
+                                                  explored: false
+                                                  bomb: false
+                                                  display: '1'
+                                                  position:
+                                                  - 6
+                                                  - 3
+                                                  neighbors:
+                                                  - *25
+                                                  - *31
+                                                  - *32
+                                                  - *30
+                                                  - &39 !ruby/object:Tile
+                                                    explored: false
+                                                    bomb: false
+                                                    display: "*"
+                                                    position:
+                                                    - 6
+                                                    - 4
+                                                    neighbors: []
+                                                    revealed: false
+                                                  - &37 !ruby/object:Tile
+                                                    explored: false
+                                                    bomb: false
+                                                    display: _
+                                                    position:
+                                                    - 7
+                                                    - 2
+                                                    neighbors:
+                                                    - *33
+                                                    - *30
+                                                    - *34
+                                                    - &35 !ruby/object:Tile
+                                                      explored: false
+                                                      bomb: false
+                                                      display: '1'
+                                                      position:
+                                                      - 7
+                                                      - 1
+                                                      neighbors:
+                                                      - *28
+                                                      - *33
+                                                      - *30
+                                                      - &36 !ruby/object:Tile
+                                                        explored: false
+                                                        bomb: false
+                                                        display: '1'
+                                                        position:
+                                                        - 7
+                                                        - 0
+                                                        neighbors:
+                                                        - *28
+                                                        - *33
+                                                        - *35
+                                                        - &38 !ruby/object:Tile
+                                                          explored: false
+                                                          bomb: false
+                                                          display: _
+                                                          position:
+                                                          - 8
+                                                          - 0
+                                                          neighbors:
+                                                          - *36
+                                                          - *35
+                                                          - &44 !ruby/object:Tile
+                                                            explored: false
+                                                            bomb: false
+                                                            display: _
+                                                            position:
+                                                            - 8
+                                                            - 1
+                                                            neighbors:
+                                                            - *36
+                                                            - *35
+                                                            - *37
+                                                            - *38
+                                                            - &40 !ruby/object:Tile
+                                                              explored: false
+                                                              bomb: false
+                                                              display: _
+                                                              position:
+                                                              - 8
+                                                              - 2
+                                                              neighbors:
+                                                              - *35
+                                                              - *37
+                                                              - &41 !ruby/object:Tile
+                                                                explored: false
+                                                                bomb: false
+                                                                display: '1'
+                                                                position:
+                                                                - 7
+                                                                - 3
+                                                                neighbors:
+                                                                - *30
+                                                                - *34
+                                                                - *39
+                                                                - *37
+                                                                - &42 !ruby/object:Tile
+                                                                  explored: false
+                                                                  bomb: true
+                                                                  display: "*"
+                                                                  position:
+                                                                  - 7
+                                                                  - 4
+                                                                  neighbors: []
+                                                                  revealed: false
+                                                                - *40
+                                                                - &45 !ruby/object:Tile
+                                                                  explored: false
+                                                                  bomb: false
+                                                                  display: '1'
+                                                                  position:
+                                                                  - 8
+                                                                  - 3
+                                                                  neighbors:
+                                                                  - *37
+                                                                  - *41
+                                                                  - *42
+                                                                  - *40
+                                                                  - &43 !ruby/object:Tile
+                                                                    explored: false
+                                                                    bomb: false
+                                                                    display: "*"
+                                                                    position:
+                                                                    - 8
+                                                                    - 4
+                                                                    neighbors: []
+                                                                    revealed: false
+                                                                  revealed: true
+                                                                - *43
+                                                                revealed: true
+                                                              - *44
+                                                              - *45
+                                                              revealed: true
+                                                            revealed: true
+                                                          revealed: true
+                                                        - *44
+                                                        revealed: true
+                                                      - *37
+                                                      - *38
+                                                      - *44
+                                                      - *40
+                                                      revealed: true
+                                                    - *41
+                                                    - *44
+                                                    - *40
+                                                    - *45
+                                                    revealed: true
+                                                  - *41
+                                                  - *42
+                                                  revealed: true
+                                                - *39
+                                                revealed: true
+                                              - *33
+                                              - *34
+                                              - *35
+                                              - *37
+                                              - *41
+                                              revealed: true
+                                            - *36
+                                            - *35
+                                            - *37
+                                            revealed: true
+                                          - *30
+                                          revealed: true
+                                        - *31
+                                        - *33
+                                        - *30
+                                        - *34
+                                        revealed: true
+                                      - *31
+                                      - *32
+                                      revealed: true
+                                    - *29
+                                    revealed: true
+                                  - *23
+                                  - *24
+                                  - *27
+                                  - *25
+                                  - *31
+                                  revealed: true
+                                - *26
+                                - *27
+                                - *25
+                                revealed: true
+                              - *20
+                              revealed: true
+                            - *21
+                            - *23
+                            - *20
+                            - *24
+                            revealed: true
+                          - *21
+                          - *22
+                          revealed: true
+                        - *19
+                        revealed: true
+                      - *13
+                      - *14
+                      - *17
+                      - *15
+                      - *21
+                      revealed: true
+                    - *16
+                    - *17
+                    - *15
+                    revealed: true
+                  - *16
+                  - *17
+                  revealed: true
+                - *13
+                revealed: true
+              - *7
+              - *8
+              - *13
+              - *10
+              revealed: true
+            - *11
+            - *13
+            - *10
+            - *14
+            revealed: true
+          - *11
+          - *12
+          revealed: true
+        - *5
+        - *7
+        - *11
+        revealed: true
+      - *6
+      - *5
+      - *7
+      revealed: true
+    - *6
+    - *5
+    revealed: true
+  - *2
+  - *3
+  - *4
+  - *9
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 0
+    - 5
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 0
+    - 6
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 0
+    - 7
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: true
+    display: "*"
+    position:
+    - 0
+    - 8
+    neighbors: []
+    revealed: false
+  - *6
+  - *5
+  - *7
+  - *11
+  - *12
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 1
+    - 5
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 1
+    - 6
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 1
+    - 7
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 1
+    - 8
+    neighbors: []
+    revealed: false
+  - *8
+  - *13
+  - *10
+  - *14
+  - *19
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 2
+    - 5
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 2
+    - 6
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 2
+    - 7
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 2
+    - 8
+    neighbors: []
+    revealed: false
+  - *16
+  - *17
+  - *15
+  - *21
+  - *22
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 3
+    - 5
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 3
+    - 6
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 3
+    - 7
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 3
+    - 8
+    neighbors: []
+    revealed: false
+  - *18
+  - *23
+  - *20
+  - *24
+  - *29
+  - &46 !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 4
+    - 5
+    neighbors: []
+    revealed: false
+  - &47 !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 4
+    - 6
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: true
+    display: "*"
+    position:
+    - 4
+    - 7
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 4
+    - 8
+    neighbors: []
+    revealed: false
+  - *26
+  - *27
+  - *25
+  - *31
+  - *32
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: '1'
+    position:
+    - 5
+    - 5
+    neighbors:
+    - *29
+    - *46
+    - *47
+    - *32
+    - &48 !ruby/object:Tile
+      explored: false
+      bomb: false
+      display: "*"
+      position:
+      - 5
+      - 6
+      neighbors: []
+      revealed: false
+    - *39
+    - &49 !ruby/object:Tile
+      explored: false
+      bomb: false
+      display: "*"
+      position:
+      - 6
+      - 5
+      neighbors: []
+      revealed: false
+    - &50 !ruby/object:Tile
+      explored: false
+      bomb: false
+      display: "*"
+      position:
+      - 6
+      - 6
+      neighbors: []
+      revealed: false
+    revealed: true
+  - *48
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 5
+    - 7
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 5
+    - 8
+    neighbors: []
+    revealed: false
+  - *28
+  - *33
+  - *30
+  - *34
+  - *39
+  - *49
+  - *50
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 6
+    - 7
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 6
+    - 8
+    neighbors: []
+    revealed: false
+  - *36
+  - *35
+  - *37
+  - *41
+  - *42
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 7
+    - 5
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 7
+    - 6
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 7
+    - 7
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 7
+    - 8
+    neighbors: []
+    revealed: false
+  - *38
+  - *44
+  - *40
+  - *45
+  - *43
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 8
+    - 5
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: true
+    display: "*"
+    position:
+    - 8
+    - 6
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 8
+    - 7
+    neighbors: []
+    revealed: false
+  - !ruby/object:Tile
+    explored: false
+    bomb: false
+    display: "*"
+    position:
+    - 8
+    - 8
+    neighbors: []
+    revealed: false
