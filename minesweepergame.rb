@@ -3,7 +3,6 @@ require 'yaml'
 require_relative './board'
 require_relative './tile'
 
-BOARD_SIZE = 9
 
 class MinesweeperGame
   def self.load_game(filename)
@@ -12,8 +11,10 @@ class MinesweeperGame
 
   attr_reader :board
 
-  def initialize(num_bombs = 9)
-    @board = Board.new(num_bombs)
+  def initialize(options = {})
+    defaults = { num_bombs: 9, board_size: 9 }
+    options = defaults.merge(options)
+    @board = Board.new(options[:num_bombs], options[:board_size])
   end
 
   def run_game
@@ -54,7 +55,7 @@ class MinesweeperGame
       return false
     end
     result = move.all? do |string|
-      string.to_i.to_s == string && string.to_i.between?(0, BOARD_SIZE - 1)
+      string.to_i.to_s == string && string.to_i.between?(0, @board.size - 1)
     end
     puts "That is not a valid tile" unless result
     result
@@ -140,6 +141,6 @@ if __FILE__ == $PROGRAM_NAME
     puts "what is the filename?"
     MinesweeperGame.load_game(gets.strip)
   else
-    MinesweeperGame.new(9).run_game
+    MinesweeperGame.new(board_size: 15, num_bombs: 100).run_game
   end
 end

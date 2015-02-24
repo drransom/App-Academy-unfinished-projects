@@ -2,26 +2,27 @@ class Board
   NEIGHBOR_PERMS = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1],
                     [1, 0], [1, 1]]
 
-  attr_reader :tiles
+  attr_reader :tiles, :size
 
-  def initialize(num_bombs = 9)
+  def initialize(num_bombs, board_size)
     @num_bombs = num_bombs
+    @size = board_size
     create_tiles #sets @tiles variable
   end
 
   def create_tiles
     bomb_tile_numbers = select_bombs
     @tiles = {}
-    BOARD_SIZE.times do |idx1|
-      BOARD_SIZE.times do |idx2|
-        bomb = bomb_tile_numbers.include?(BOARD_SIZE * idx1 + idx2)
+    @size.times do |idx1|
+      @size.times do |idx2|
+        bomb = bomb_tile_numbers.include?(@size * idx1 + idx2)
         @tiles[[idx1, idx2]] = Tile.new([idx1, idx2], self, bomb)
       end
     end
   end
 
   def select_bombs
-    (0...(BOARD_SIZE**2)).to_a.sample(@num_bombs)
+    (0...(@size**2)).to_a.sample(@num_bombs)
   end
 
   def [](position)
@@ -30,8 +31,8 @@ class Board
 
   def create_display
     display_string = ""
-    BOARD_SIZE.times do |idx1|
-      BOARD_SIZE.times do |idx2|
+    @size.times do |idx1|
+      @size.times do |idx2|
         display_string += @tiles[[idx1,idx2]].display + ' '
       end
       display_string += "\n"
@@ -46,7 +47,7 @@ class Board
 
   def won?
     revealed = @tiles.each_value { |tile| tile.revealed? && !tile.bomb? }
-    revealed == (BOARD_SIZE ** 2) - @num_bombs
+    revealed == (@size ** 2) - @num_bombs
   end
 
   def reveal_board
@@ -54,7 +55,7 @@ class Board
   end
 
   def valid_position?(arr)
-    arr.all? {|value| value.between?(0, BOARD_SIZE-1)}
+    arr.all? {|value| value.between?(0, @size-1)}
   end
 
   def calculate_position(tile, perm)
