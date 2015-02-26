@@ -8,7 +8,7 @@ class CheckersPiece
   BACKWARD_STEPS = FORWARD_STEPS.reverse_first_element
   BACKWARD_JUMPS = FORWARD_JUMPS.reverse_first_element
 
-  attr_reader :position, :color, :symbol
+  attr_reader :position, :color, :symbol, :board
 
   def initialize(position, color, board)
     @position = position
@@ -31,12 +31,17 @@ class CheckersPiece
   end
 
   def valid_steps
-    @steps.each_with_object([]) do |step, object|
+    steps.each_with_object([]) do |step, valid_steps|
       new_position = step.add_array(position)
-      object << new_position if empty_and_valid?(new_position)
+      valid_steps << new_position if empty_and_valid?(new_position)
     end
-    object
   end
+
+  def step(position)
+    raise 'not a valid step' unless valid_steps.include?(position)
+    update_position(position)
+  end
+
 
   private
 
@@ -80,6 +85,12 @@ class CheckersPiece
 
   def empty?(position)
     board.empty_position?(position)
+  end
+
+  def update_position(new_pos)
+    old_pos = position
+    @position = new_pos
+    board.move_piece(old_pos, position)
   end
 
 end

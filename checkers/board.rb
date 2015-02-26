@@ -33,6 +33,20 @@ class CheckersBoard
     display_string + "  #{columns}"
   end
 
+  def move_piece(old_pos, new_pos)
+    self[new_pos] = self[old_pos]
+    self[old_pos] = nil
+  end
+
+  def valid_position?(position)
+    row, col = position
+    (0...size).include?(row) && (0...size).include?(col)
+  end
+
+  def empty_position?(position)
+    self[position].nil?
+  end
+
   private
 
   def[]=(position, new_value)
