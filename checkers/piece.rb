@@ -8,13 +8,14 @@ class CheckersPiece
   BACKWARD_STEPS = FORWARD_STEPS.reverse_first_element
   BACKWARD_JUMPS = FORWARD_JUMPS.reverse_first_element
 
-  attr_reader :position, :color
+  attr_reader :position, :color, :symbol
 
   def initialize(position, color, board)
     @position = position
     @color = color #light or dark
     @board = board
     @monarch = false #gender-neutral SJW
+    @symbol = "*"
     initialize_moves
   end
 
@@ -36,7 +37,6 @@ class CheckersPiece
     end
     object
   end
-
 
   private
 

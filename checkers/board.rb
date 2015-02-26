@@ -1,6 +1,7 @@
 require_relative 'game'
 require_relative 'checkers_helper'
 require_relative 'players.rb'
+require 'byebug'
 
 class CheckersBoard
 
@@ -16,6 +17,19 @@ class CheckersBoard
 
   def[](position)
     @grid[convert_dimensions(position)]
+  end
+
+  def create_display
+    columns = ('a'..'z').to_a[0...size].join(" ")
+    display_string = "  " + columns + "\n"
+    size.times do |row|
+      display_string += "#{row} "
+      size.times do |col|
+        display_string += "#{symbol([row, col])} "
+      end
+      display_string += "#{row}\n"
+    end
+    display_string + columns
   end
 
   private
@@ -36,5 +50,8 @@ class CheckersBoard
     Array.new(size ** 2)
   end
 
+  def symbol(position)
+    self[position] ? self[position].symbol : "_"
+  end
 
 end
