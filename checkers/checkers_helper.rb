@@ -7,4 +7,12 @@ class Array
     end
     new_arr
   end
+
+  def add_array(other_array)
+    new_arr = []
+    self.each_with_index do |elem, index|
+      new_arr << elem + other_array[index]
+    end
+    new_arr
+  end
 end
