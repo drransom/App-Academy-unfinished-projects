@@ -15,4 +15,8 @@ class Array
     end
     new_arr
   end
+
+  def average(other_array)
+    self.add_array(other_array).map { |elem| elem / 2 }
+  end
 end
