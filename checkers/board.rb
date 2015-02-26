@@ -1,4 +1,5 @@
 require_relative 'checkers_files'
+require 'byebug'
 
 class CheckersBoard
 
@@ -12,7 +13,7 @@ class CheckersBoard
     initialize_grid
   end
 
-  def[](position)
+  def [](position)
     @grid[convert_dimensions(position)]
   end
 
@@ -56,9 +57,15 @@ class CheckersBoard
     can_jump?(color)
   end
 
+  def last_row?(piece)
+    debugger
+    last_row = (piece.color == :dark) ? 0 : size-1
+    piece.position[0] == last_row
+  end
+
   private
 
-  def[]=(position, new_value)
+  def []=(position, new_value)
     @grid[convert_dimensions(position)] = new_value
   end
 
@@ -67,7 +74,7 @@ class CheckersBoard
   end
 
   def convert_dimensions(position)
-    position[0]*size + position[1]
+    position[0] * size + position[1]
   end
 
   def initialize_grid
@@ -98,7 +105,6 @@ class CheckersBoard
     row, col = position
     row.even? ? col.odd? : col.even?
   end
-
 
   def can_jump?(color)
     pieces(color).any? { |piece| !piece.valid_jumps.empty? }

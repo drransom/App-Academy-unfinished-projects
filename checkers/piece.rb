@@ -7,36 +7,25 @@ class CheckersPiece
   BACKWARD_STEPS = FORWARD_STEPS.reverse_first_element
   BACKWARD_JUMPS = FORWARD_JUMPS.reverse_first_element
 
-  attr_reader :color, :symbol, :board
-  attr_accessor :position
+  attr_reader :color, :symbol, :position
 
   def initialize(position, color, board)
     @position = position
     @color = color #light or dark
     @board = board
-    @monarch = false #gender-neutral SJW
+    @monarch = false #gender-neutral
     @symbol = (color == :dark) ? '*' : '@'
     initialize_moves
-  end
-
-  def crown!
-    return false if monarch?
-    @monarch = true
-    steps = (FORWARD_STEPS + BACKWARD_STEPS)
-    jumps = (FORWARD_JUMPS + BACKWARD_JUMPS)
-  end
-
-  def monarch?
-    @monarch
   end
 
   def step(new_position)
     raise 'not a valid step' unless valid_steps.include?(new_position)
     update_position(new_position)
+    check_for_crown_and_crown
   end
 
   def valid_steps
-    steps.each_with_object([]) do |step, valid_steps|
+    @steps.each_with_object([]) do |step, valid_steps|
       new_position = step.add_array(position)
       valid_steps << new_position if empty_and_valid?(new_position)
     end
@@ -47,10 +36,11 @@ class CheckersPiece
     old_position = position
     update_position(new_position)
     board.remove_piece(old_position.average(position))
+    check_for_crown_and_crown
   end
 
   def valid_jumps
-    jumps.each_with_object([]) do |jump, valid_jumps|
+    @jumps.each_with_object([]) do |jump, valid_jumps|
       new_position = jump.add_array(position)
       next unless empty_and_valid?(new_position)
       mid_position = new_position.average(position)
@@ -74,22 +64,6 @@ class CheckersPiece
     @board
   end
 
-  def steps
-    @steps
-  end
-
-  def steps=(new_steps)
-    @steps = new_steps
-  end
-
-  def jumps
-    @jumps
-  end
-
-  def jumps=(new_jumps)
-    @jumps = new_jumps
-  end
-
   def empty_and_valid?(position)
     valid_position?(position) && empty?(position)
   end
@@ -110,6 +84,20 @@ class CheckersPiece
 
   def occupied_by_opponent?(position)
     board.occupied?(position) && board[position].color != color
+  end
+
+  def uncrowned?
+    !@monarch
+  end
+
+  def check_for_crown_and_crown
+    crown! if board.last_row?(self) && uncrowned?
+  end
+
+  def crown!
+    @monarch = true
+    @steps = (FORWARD_STEPS + BACKWARD_STEPS)
+    @jumps = (FORWARD_JUMPS + BACKWARD_JUMPS)
   end
 
 end
