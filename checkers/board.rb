@@ -23,13 +23,14 @@ class CheckersBoard
     columns = ('a'..'z').to_a[0...size].join(" ")
     display_string = "  " + columns + "\n"
     size.times do |row|
-      display_string += "#{row} "
+      row_symbol = size - row
+      display_string += "#{row_symbol} "
       size.times do |col|
         display_string += "#{symbol([row, col])} "
       end
-      display_string += "#{row}\n"
+      display_string += "#{row_symbol}\n"
     end
-    display_string + columns
+    display_string + "  #{columns}"
   end
 
   private
