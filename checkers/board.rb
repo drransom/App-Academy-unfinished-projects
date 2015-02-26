@@ -47,6 +47,18 @@ class CheckersBoard
     self[position].nil?
   end
 
+  def occupied?(position)
+    !empty_position?(position)
+  end
+
+  def remove_piece(position)
+    self[position] = nil
+  end
+
+  def must_jump?(color)
+    can_jump?(color)
+  end
+
   private
 
   def[]=(position, new_value)
@@ -81,9 +93,18 @@ class CheckersBoard
     end
   end
 
+  def pieces(color)
+    @grid.compact.select { |piece| piece.color == color }
+  end
+
   def dark_square?(position)
     row, col = position
     row.even? ? col.odd? : col.even?
+  end
+
+
+  def can_jump?(color)
+    pieces(color).any? { |piece| !piece.valid_jumps.empty? }
   end
 
 end

@@ -3,7 +3,7 @@ class Array
   def reverse_first_element
     new_arr = []
     self.each do |element|
-      new_arr << [-element.last] + element[1..-1]
+      new_arr << [-element.first] + element[1..-1]
     end
     new_arr
   end
