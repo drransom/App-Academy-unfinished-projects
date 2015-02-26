@@ -1,7 +1,4 @@
-require_relative 'game'
-require_relative 'checkers_helper'
-require_relative 'players.rb'
-require 'byebug'
+require_relative 'checkers_files'
 
 class CheckersBoard
 

@@ -1,3 +1,5 @@
+require_relative 'checkers_files'
+
 class HumanPlayer
   attr_reader :color
 

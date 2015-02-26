@@ -1,6 +1,4 @@
-require_relative 'board'
-require_relative 'piece'
-require_relative 'checkers_helper'
+require_relative 'checkers_files'
 
 class CheckersGame
   def initialize(options = {})

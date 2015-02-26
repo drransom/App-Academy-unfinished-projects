@@ -1,6 +1,4 @@
-require_relative 'board'
-require_relative 'checkers_helper'
-require 'byebug'
+require_relative 'checkers_files'
 
 class CheckersPiece
 

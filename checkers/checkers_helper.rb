@@ -1,5 +1,5 @@
 class Array
-  #assumes array of arrays where the element is a number.
+  #assumes array of arrays where the first element of each subarray is a number.
   def reverse_first_element
     new_arr = []
     self.each do |element|
