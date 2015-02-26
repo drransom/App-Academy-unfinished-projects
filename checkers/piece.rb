@@ -15,7 +15,7 @@ class CheckersPiece
     @color = color #light or dark
     @board = board
     @monarch = false #gender-neutral SJW
-    @symbol = "*"
+    @symbol = (color == :dark) ? '*' : '@'
     initialize_moves
   end
 

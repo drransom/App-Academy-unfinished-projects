@@ -12,7 +12,7 @@ class CheckersBoard
     @player1 = values[:player1]
     @player2 = values[:player2]
     @size = values[:size]
-    @grid = initialize_grid
+    initialize_grid
   end
 
   def[](position)
@@ -48,11 +48,28 @@ class CheckersBoard
   end
 
   def initialize_grid
-    Array.new(size ** 2)
+    @grid = Array.new(size ** 2)
+    create_pieces(:light)
+    create_pieces(:dark)
   end
 
   def symbol(position)
     self[position] ? self[position].symbol : "_"
+  end
+
+  def create_pieces(color)
+    first_row = (color == :light) ? 0 : size - 3
+    (first_row..(first_row + 2)).each do |row|
+      size.times do |col|
+        pos = [row, col]
+        self[pos] = CheckersPiece.new(pos, color, self) if dark_square?(pos)
+      end
+    end
+  end
+
+  def dark_square?(position)
+    row, col = position
+    row.even? ? col.odd? : col.even?
   end
 
 end
