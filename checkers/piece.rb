@@ -8,6 +8,7 @@ class CheckersPiece
   BACKWARD_JUMPS = FORWARD_JUMPS.reverse_first_element
 
   attr_reader :color, :symbol, :position
+  attr_accessor :board
 
   def initialize(position, color, board)
     @position = position
@@ -58,10 +59,6 @@ class CheckersPiece
       @steps = BACKWARD_STEPS
       @jumps = BACKWARD_JUMPS
     end
-  end
-
-  def board
-    @board
   end
 
   def empty_and_valid?(position)

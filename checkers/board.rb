@@ -89,7 +89,15 @@ class CheckersBoard
     piece.position[0] == last_row
   end
 
-  private
+  def dup
+    copy = CheckersBoard.new
+    @grid.each_with_index do |piece, index|
+      current_position = invert_dimensions(index)
+      copy[current_position] = piece ? piece.dup : nil
+      copy[current_position].board = copy unless copy[current_position].nil?
+    end
+    copy
+  end
 
   def []=(position, new_value)
     @grid[convert_dimensions(position)] = new_value
@@ -101,6 +109,10 @@ class CheckersBoard
 
   def convert_dimensions(position)
     position[0] * size + position[1]
+  end
+
+  def invert_dimensions(num)
+    [num / size, num % size]
   end
 
   def initialize_grid
@@ -135,5 +147,11 @@ class CheckersBoard
   def no_valid_moves?(color)
     !can_jump?(color) && !can_step?(color)
   end
+
+
+
+
+
+  private
 
 end
