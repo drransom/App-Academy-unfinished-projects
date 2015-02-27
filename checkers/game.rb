@@ -33,7 +33,7 @@ class CheckersGame
         raise 'invalid input' unless input_valid?(move)
         move = convert_h_to_c(move)
         if move.length > 2
-          board.multi_jump_chain(moves)
+          #board.multi_jump_chain(moves)
         else
           jump_again = board.process_move(move, @current_player.color, jump_again)
           flip_current_player if jump_again
