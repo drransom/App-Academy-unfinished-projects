@@ -32,8 +32,12 @@ class CheckersGame
         move = @current_player.obtain_input(convert_c_to_h(jump_again))
         raise 'invalid input' unless input_valid?(move)
         move = convert_h_to_c(move)
-        jump_again = board.process_move(move, @current_player.color, jump_again)
-        flip_current_player if jump_again
+        if move.length > 2
+          board.multi_jump_chain(moves)
+        else
+          jump_again = board.process_move(move, @current_player.color, jump_again)
+          flip_current_player if jump_again
+        end
       rescue => e
         puts e.message
         puts e.backtrace

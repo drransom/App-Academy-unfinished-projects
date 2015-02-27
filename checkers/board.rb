@@ -148,10 +148,4 @@ class CheckersBoard
     !can_jump?(color) && !can_step?(color)
   end
 
-
-
-
-
-  private
-
 end
