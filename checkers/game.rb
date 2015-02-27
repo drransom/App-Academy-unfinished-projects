@@ -2,11 +2,15 @@ require_relative 'checkers_files'
 
 class CheckersGame
   def initialize(options = {})
-    default = {capture_required: true, size: 8}
+    default = { player1: HumanPlayer.new(:light), player2: HumanPlayer.new(:dark),
+               must_capture: true, size: 8 }
     options = default.merge(options)
-    @capture_required = options[:capture_required]
+    @must_capture = options[:must_capture]
     @size = options[:size]
+    @player1 = options[:player1]
+    @player2 = options[:player2]
     @board = CheckersBoard.new(options)
+    @current_player = @player1
   end
 
   def play_game
@@ -21,35 +25,42 @@ class CheckersGame
   end
 
   def run_game
-    until game_over?
+    jump_again = nil
+    until board.game_over?(@current_player.color)
       begin
-        move = obtain_input_from_current_player
-        raise 'invalid input' unless input_valid(move)
-        jump = @board.process_move(convert_notation(move))
-      rescue
+        display_board
+        move = @current_player.obtain_input(convert_c_to_h(jump_again))
+        raise 'invalid input' unless input_valid?(move)
+        move = convert_h_to_c(move)
+        jump_again = board.process_move(move, @current_player.color, jump_again)
+        flip_current_player if jump_again
+      rescue => e
+        puts e.message
+        puts e.backtrace
         retry
       end
+      flip_current_player
     end
   end
 
-  def convert_notation(move)
+  def flip_current_player
+    @current_player = (@current_player == @player1) ? @player2 : @player1
+  end
+
+  def convert_h_to_c(move)
     move.split(/[ ,]+/).map(&:downcase).map { |str| human_to_computer(str) }
   end
 
   def human_to_computer(str)
-    [('a'..'z').to_a.find_index(str[0]), str[1].to_i]
+    [@size - str[1].to_i, ('a'..'z').to_a.find_index(str[0])]
+  end
+
+  def convert_c_to_h(position)
+    position ? [@size - position[0], ('a'..'z').to_a[position[0] + 1]].join : nil
   end
 
   def input_valid?(move)
     true
-  end
-
-  def obtain_input_from_current_player
-    begin
-      move = request_input_from_player
-    rescue
-      retry
-    end
   end
 
   def game_over? #TODO
@@ -57,6 +68,20 @@ class CheckersGame
   end
 
   def display_result
+    flip_current_player
+    puts "#{@current_player.color} wins!"
   end
 
+  def board
+    @board
+  end
+
+  def display_board
+    puts board.create_display
+  end
+
+end
+
+if __FILE__ == $0
+  CheckersGame.new().play_game
 end

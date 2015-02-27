@@ -18,8 +18,7 @@ class CheckersPiece
     initialize_moves
   end
 
-  def step(new_position)
-    raise 'not a valid step' unless valid_steps.include?(new_position)
+  def step!(new_position)
     update_position(new_position)
     check_for_crown_and_crown
   end
@@ -31,12 +30,13 @@ class CheckersPiece
     end
   end
 
-  def jump(new_position)
-    raise 'not a valid jump' unless valid_jumps.include?(new_position)
+  def jump!(new_position)
     old_position = position
     update_position(new_position)
     board.remove_piece(old_position.average(position))
+    jump_again = !valid_jumps.empty?
     check_for_crown_and_crown
+    jump_again ? new_position : nil
   end
 
   def valid_jumps

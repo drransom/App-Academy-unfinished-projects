@@ -5,11 +5,12 @@ class CheckersBoard
 
   def initialize(options = {})
     defaults = {player1: HumanPlayer.new(:light), player2: HumanPlayer.new(:dark),
-                size: 8}
+                size: 8, must_capture: true}
     values = defaults.merge(options)
     @player1 = values[:player1]
     @player2 = values[:player2]
     @size = values[:size]
+    @must_capture = values[:must_capture]
     initialize_grid
   end
 
@@ -29,6 +30,28 @@ class CheckersBoard
       display_string += "#{row_symbol}\n"
     end
     display_string + "  #{columns}"
+  end
+
+  def process_move(move, color, jump_again)
+    from, to = move
+    from_square = self[from]
+    raise 'No piece there.' unless occupied?(from)
+    raise 'Not your piece.' unless color == from_square.color
+    raise 'You must move the same piece again.' if jump_again && jump_again != from
+    jump = from_square.valid_jumps.include?(to)
+    step = from_square.valid_steps.include?(to)
+    raise 'Not a valid move.' unless jump || step
+
+    jump_again_flag = jump ? from_square.jump!(to) : false
+    if step
+      raise 'You must capture if possible.' if @must_capture & can_jump?(color)
+      from_square.step!(to)
+    end
+    jump_again_flag
+  end
+
+  def game_over?(color)
+    pieces(color).nil? || no_valid_moves?(color)
   end
 
   def move_piece(old_pos, new_pos)
@@ -53,12 +76,15 @@ class CheckersBoard
     self[position] = nil
   end
 
-  def must_jump?(color)
-    can_jump?(color)
+  def can_jump?(color)
+    pieces(color).any? { |piece| !piece.valid_jumps.empty? }
+  end
+
+  def can_step?(color)
+    pieces(color).any? { |piece| !piece.valid_steps.empty? }
   end
 
   def last_row?(piece)
-    debugger
     last_row = (piece.color == :dark) ? 0 : size-1
     piece.position[0] == last_row
   end
@@ -106,8 +132,8 @@ class CheckersBoard
     row.even? ? col.odd? : col.even?
   end
 
-  def can_jump?(color)
-    pieces(color).any? { |piece| !piece.valid_jumps.empty? }
+  def no_valid_moves?(color)
+    !can_jump?(color) && !can_step?(color)
   end
 
 end
