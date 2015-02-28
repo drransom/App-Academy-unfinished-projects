@@ -87,3 +87,11 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+def lets_cards
+  Card::RANKS.each do |rank, value|
+    Card::SUITS.each do |suit|
+      let("#{value}#{suit[0].upcase}".to_sym) { Card.new(rank, suit)}
+    end
+  end
+end
