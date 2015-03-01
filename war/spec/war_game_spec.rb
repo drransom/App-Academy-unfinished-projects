@@ -1,6 +1,11 @@
 require 'war'
 
-describe War do
+describe WarGame do
+  let(:player1) { double("player1") }
+  let(:player2) { double("player2") }
+  let(:game) { WarGame.new(player1, player2) }
 
-  let(:game)
+  describe '#initialize' do
+    it 'has two players' do
+    test_
 end

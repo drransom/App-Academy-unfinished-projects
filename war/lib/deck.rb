@@ -49,5 +49,9 @@ class Deck
     @cards.concat(new_cards)
   end
 
+  def empty?
+    cards.empty?
+  end
+
   private
 end

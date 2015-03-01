@@ -22,8 +22,13 @@ class Player
     deck.receive_cards(cards)
   end
 
+  def lost?
+    deck.empty?
+  end
+
   def celebrate!
     puts "Let's all celebrate and have a good time!"
     true
   end
+
 end

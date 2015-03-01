@@ -42,4 +42,18 @@ describe Player do
       expect(player.celebrate!).to be_truthy
     end
   end
+
+  describe '#lost?' do
+    it 'loses when deck is empty' do
+      player.add_deck(deck)
+      expect(deck).to receive(:empty?).and_return(true)
+      expect(player.lost?).to be true
+    end
+
+    it "doesn't lose when deck isn't empty" do
+      player.add_deck(deck)
+      expect(deck).to receive(:empty?).and_return(false)
+      expect(player.lost?).to be false
+    end
+  end
 end
