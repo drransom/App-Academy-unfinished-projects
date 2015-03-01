@@ -97,4 +97,19 @@ describe Deck do
       expect(deck.count).to be 29
     end
   end
+
+  describe '#empty?' do
+    let(:some_cards) { Array.new(10) { |i| double("card#{i}") } }
+    let(:deck) { Deck.new(some_cards) }
+    let(:empty_deck) { Deck.new([]) }
+
+    it "doesn't return empty when not empty" do
+      expect(deck.empty?).to be false
+    end
+
+    it "returns empty when empty" do
+      expect(empty_deck.empty?).to be true
+    end
+  end
+
 end

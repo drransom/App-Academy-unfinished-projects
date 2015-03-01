@@ -7,5 +7,6 @@ describe WarGame do
 
   describe '#initialize' do
     it 'has two players' do
-    test_
+    test_game =
+  end
 end
