@@ -3,8 +3,15 @@ require 'deck'
 class Player
   attr_reader :deck, :game
 
-  def initialize(deck, game)
-    @deck, @game = deck, game
+  def initialize
+  end
+
+  def add_deck(deck)
+    @deck = deck
+  end
+
+  def add_game(game)
+    @game = game
   end
 
   def play_cards(num)
