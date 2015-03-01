@@ -89,9 +89,10 @@ RSpec.configure do |config|
 end
 
 def lets_cards
-  Card::RANKS.each do |rank, value|
+  Card::RANKS.each do |rank|
+    rank_symbol = Card::RANK_SYMBOLS[rank]
     Card::SUITS.each do |suit|
-      let("#{value}#{suit[0].upcase}".to_sym) { Card.new(rank, suit)}
+      let("#{suit[0].downcase}#{rank_symbol.downcase}".to_sym) { Card.new(rank, suit) }
     end
   end
 end
