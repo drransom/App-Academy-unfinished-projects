@@ -1,9 +1,10 @@
-require 'deck'
+require_relative 'deck'
 
 class Player
-  attr_reader :deck, :game
+  attr_reader :deck, :game, :name
 
-  def initialize
+  def initialize(name)
+    @name = name
   end
 
   def add_deck(deck)
@@ -26,7 +27,12 @@ class Player
     deck.empty?
   end
 
+  def deck_size
+    deck.count
+  end
+
   def celebrate!
+    puts "#{name} wins!"
     puts "Let's all celebrate and have a good time!"
     true
   end
