@@ -3,9 +3,16 @@ require 'singleton'
 
 module Saveable
   def save
-    class_name = self.class.to_s.downcase + "s"
-    class_name.gsub!('ys', 'ies')
-    # command = self.instance_variables.include?('id') ? 'INSERT INTO' : 'UPDATE'
+    table_name = self.class.to_s.downcase + "s"
+    table_name.gsub!('ys', 'ies')
+    if self.instance_variable_get(:@id).nil?
+      save_new(table_name)
+    else
+      update(table_name)
+    end
+  end
+
+  def save_new(table_name)
     columns = self.instance_variables[1..-1]
     column_string = columns.join(', ').gsub(/[\:\@]/, '')
     data = columns.map do |iv|
@@ -13,11 +20,29 @@ module Saveable
     end.to_s.gsub(/\"/, "'").gsub(/[\[\]]/,'')
     $qd.execute(<<-SQL)
     INSERT INTO
-      #{class_name} (#{column_string})
+      #{table_name} (#{column_string})
     VALUES
       (#{data})
     SQL
     self.id = $qd.last_insert_row_id
+  end
+
+  def update(table_name)
+    id = self.instance_variable_get(:@id)
+    columns = self.instance_variables[1..-1]
+    set_values = columns.map do |iv|
+      value = self.instance_variable_get(iv)
+      value = "'" + value + "'" if value.is_a? String
+      iv.to_s.gsub(/[\:\@]/, '') + "=" + value.to_s
+    end.join(", ")
+    $qd.execute(<<-SQL)
+    UPDATE
+      #{table_name}
+    SET
+      #{set_values}
+    WHERE
+      id = #{id}
+    SQL
   end
 end
 
