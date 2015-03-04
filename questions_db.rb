@@ -15,10 +15,11 @@ module Saveable
   def save_new(table_name)
     columns = self.instance_variables[1..-1]
     column_string = columns.join(', ').gsub(/[\:\@]/, '')
-    data = columns.map do |iv|
-      self.instance_variable_get(iv)
-    end.to_s.gsub(/\"/, "'").gsub(/[\[\]]/,'')
-    $qd.execute(<<-SQL)
+    data = ('?, ' * columns.length)[0..-3]
+    data_arr = columns.map do |iv|
+      self.instance_variable_get(iv).to_s.gsub(/\"/, "'")
+    end
+    $qd.execute(<<-SQL, *data_arr)
     INSERT INTO
       #{table_name} (#{column_string})
     VALUES
@@ -31,15 +32,17 @@ module Saveable
     id = self.instance_variable_get(:@id)
     columns = self.instance_variables[1..-1]
     set_values = columns.map do |iv|
-      value = self.instance_variable_get(iv)
-      value = "'" + value + "'" if value.is_a? String
-      iv.to_s.gsub(/[\:\@]/, '') + "=" + value.to_s
+      self.instance_variable_get(iv)
+      #value.is_a?(String) ? "'" + value + "'" : value
+    end
+    set_columns = columns.map do |iv|
+      iv.to_s.gsub(/[\:\@]/, '') + "=" + '?'
     end.join(", ")
-    $qd.execute(<<-SQL)
+    $qd.execute(<<-SQL, *set_values)
     UPDATE
       #{table_name}
     SET
-      #{set_values}
+      #{set_columns}
     WHERE
       id = #{id}
     SQL
