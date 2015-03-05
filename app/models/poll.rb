@@ -21,8 +21,8 @@ class Poll < ActiveRecord::Base
 
   has_many(
     :questions,
-    class_name: 'Question'
-    primary_key: :id
+    class_name: 'Question',
+    primary_key: :id,
     foreign_key: :poll_id
   )
 end
