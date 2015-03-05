@@ -11,7 +11,7 @@
 
 class Response < ActiveRecord::Base
   validates :user_id, :answer_choice_id, presence: true
-  validate :user_has_not_already_answered_question
+  validate :user_has_not_already_answered_question, :user_is_not_poll_creator
 
   belongs_to(
     :respondent,
@@ -36,6 +36,12 @@ class Response < ActiveRecord::Base
   def user_has_not_already_answered_question
     if sibling_responses.where("responses.user_id != ?", user_id).count > 0
       errors[:user] << "has already answered this question."
+    end
+  end
+
+  def user_is_not_poll_creator
+    if answer_choice.question.poll.author_id == user_id
+      errors[:user] << "is the creator of this poll"
     end
   end
 end
