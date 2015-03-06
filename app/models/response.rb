@@ -30,11 +30,12 @@ class Response < ActiveRecord::Base
   has_one(:question, through: :answer_choice, source: :question)
 
   def sibling_responses
+    # debugger
     question.responses.where(":id IS NULL OR responses.id != :id", id: id)
   end
 
   def user_has_not_already_answered_question
-    if sibling_responses.where("responses.user_id != ?", user_id).count > 0
+    if sibling_responses.where("responses.user_id = ?", user_id).count > 0
       errors[:user] << "has already answered this question."
     end
   end
