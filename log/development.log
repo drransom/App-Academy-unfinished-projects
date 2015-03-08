@@ -1547,3 +1547,125 @@ Processing by ArticlesController#show as HTML
   [1m[36mArticle Load (0.4ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1[0m  [["id", 3]]
   Rendered articles/show.html.erb within layouts/application (0.9ms)
 Completed 200 OK in 44ms (Views: 42.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/3" for ::1 at 2015-03-08 14:41:46 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mArticle Load (0.6ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1  [["id", 3]]
+  Rendered articles/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 132ms (Views: 130.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles/3/edit" for ::1 at 2015-03-08 14:41:48 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  Rendered articles/_form.html.erb (3.0ms)
+  Rendered articles/edit.html.erb within layouts/application (13.5ms)
+Completed 200 OK in 149ms (Views: 147.5ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/articles/3" for ::1 at 2015-03-08 14:41:49 -0700
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"sWciN3s3nVk7sR+V3g8+zWoBwCRu/M8bUgfZzJ8yuR/HB8w6/1hL4Dy5VwkGiwGi9IFktYcYTVolRb6dYCRtdA==", "article"=>{"title"=>"This is yet another new article title2", "body"=>"And this is the body edited!"}, "commit"=>"Update Article", "id"=>"3"}
+  [1m[35mArticle Load (0.3ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+Redirected to http://localhost:3000/articles/3
+Completed 302 Found in 3ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/3" for ::1 at 2015-03-08 14:41:49 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  Rendered articles/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 65ms (Views: 63.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/3/edit" for ::1 at 2015-03-08 14:51:17 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mArticle Load (0.3ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1  [["id", 3]]
+  Rendered articles/_form.html.erb (3.7ms)
+  Rendered articles/edit.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 103ms (Views: 101.3ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/articles/3" for ::1 at 2015-03-08 14:51:21 -0700
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"EGJ1PAoCV3FBAPZ72mfBQaxmbOhJzxPLoLtcivhjsPdmApsxjm2ByEYIvucC4/4uMubIeaArkYrX+TvbB3VknA==", "article"=>{"title"=>"This is yet another new article title2", "body"=>"And this is the body edited again!"}, "commit"=>"Update Article", "id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "articles" SET "body" = $1, "updated_at" = $2 WHERE "articles"."id" = $3[0m  [["body", "And this is the body edited again!"], ["updated_at", "2015-03-08 21:51:21.534528"], ["id", 3]]
+  [1m[35m (34.7ms)[0m  COMMIT
+Redirected to http://localhost:3000/articles/3
+Completed 302 Found in 39ms (ActiveRecord: 35.4ms)
+
+
+Started GET "/articles/3" for ::1 at 2015-03-08 14:51:21 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  Rendered articles/show.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 67ms (Views: 66.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/3/edit" for ::1 at 2015-03-08 14:52:28 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1  [["id", 3]]
+  Rendered articles/_form.html.erb (3.6ms)
+  Rendered articles/edit.html.erb within layouts/application (13.9ms)
+Completed 200 OK in 96ms (Views: 79.4ms | ActiveRecord: 4.0ms)
+
+
+Started PATCH "/articles/3" for ::1 at 2015-03-08 14:52:30 -0700
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LLkJJzjo4tsChc1B3yBXUMCOuaQNM1pD5JfZLFtrmjJa2ecqvIc0YgWNhd0HpGg/Xg4dNeTX2AKT1b59pH1OWQ==", "article"=>{"title"=>"This is yet another new article title2", "body"=>"And this is the body edited again!"}, "commit"=>"Update Article", "id"=>"3"}
+  [1m[36mArticle Load (0.4ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/articles/3
+Completed 302 Found in 5ms (ActiveRecord: 0.9ms)
+
+
+Started GET "/articles/3" for ::1 at 2015-03-08 14:52:30 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mArticle Load (0.6ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1  [["id", 3]]
+  Rendered articles/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 92ms (Views: 89.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles" for ::1 at 2015-03-08 14:53:18 -0700
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.4ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 61ms (Views: 56.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-03-08 14:53:20 -0700
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (2.0ms)
+  Rendered articles/new.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 77ms (Views: 76.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-03-08 14:53:25 -0700
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"A55jvH7mS7gtaESRYwkqQEl+tE4L4Dp7yGU42qaPpvl1/o2x+omdASpgDA27jRUv1/4Q3+IEuDq/J1+LWZlykg==", "article"=>{"title"=>"New article", "body"=>"Yet another new article"}, "commit"=>"Create Article"}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "articles" ("title", "body", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "New article"], ["body", "Yet another new article"], ["created_at", "2015-03-08 21:53:25.515920"], ["updated_at", "2015-03-08 21:53:25.515920"]]
+  [1m[35m (32.9ms)[0m  COMMIT
+Redirected to http://localhost:3000/articles/4
+Completed 302 Found in 39ms (ActiveRecord: 33.8ms)
+
+
+Started GET "/articles/4" for ::1 at 2015-03-08 14:53:25 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1[0m  [["id", 4]]
+  Rendered articles/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 81ms (Views: 79.4ms | ActiveRecord: 0.2ms)
