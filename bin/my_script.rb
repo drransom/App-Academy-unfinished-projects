@@ -5,13 +5,13 @@ url = Addressable::URI.new(
   scheme: 'http',
   host: 'localhost',
   port: 3000,
-  path: '/users',
-  query_values: {
-    'some_category[a_key]' => 'another value',
-    'some_category[a_second_key]' => 'yet another value',
-    'some_category[inner_inner_hash][key]' => 'value',
-    'something_else' => 'aaahhhhh'
-  }
+  path: '/users/1.json',
 ).to_s
 
-puts RestClient.get(url)
+puts RestClient.delete(url)
+
+# begin
+#   puts RestClient.post(url, {user: {name: "Gizmo", email: "gizmo@gizmo.com" } })
+# rescue
+#   puts "rest-client encountered error"
+# end
