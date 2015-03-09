@@ -1,16 +1,18 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: contacts
 #
 #  id         :integer          not null, primary key
-#  username   :string           not null
+#  name       :string           not null
+#  email      :string           not null
+#  user_id    :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 require 'test_helper'
 
-class UserTest < ActiveSupport::TestCase
+class ContactTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
