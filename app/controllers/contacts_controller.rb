@@ -1,6 +1,12 @@
 class ContactsController < ApplicationController
   def index
-    render json: Contact.all
+    @user = User.find(params[:user_id])
+    if @user
+      render json: (@user.contacts.all + @user.shared_contacts.all)
+    else
+      render json: @user.errors.full_messages,
+                   error: :user_not_found
+    end
   end
 
   def create
