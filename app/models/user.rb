@@ -9,6 +9,7 @@
 #
 
 class User < ActiveRecord::Base
+  include Commentable
   validates :username, presence: true, uniqueness: true
 
   has_many :contacts
@@ -18,4 +19,5 @@ class User < ActiveRecord::Base
     through: :contact_shares,
     source: :contact
   )
+
 end

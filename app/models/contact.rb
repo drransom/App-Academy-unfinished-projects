@@ -11,6 +11,8 @@
 #
 
 class Contact < ActiveRecord::Base
+  include Commentable
+
   validates :name, :email, :user_id, presence: true
   validates :user_id, uniqueness: { scope: :email }
 
