@@ -5,6 +5,11 @@
 <% end %>
 
 <form action="<%= form_action %>" method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
   <% if cat_rental_request.persisted? %>
     <input type="hidden" name="_method" value="PATCH">
   <% end %>

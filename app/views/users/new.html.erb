@@ -1,8 +1,8 @@
-<h1>Log in!</h1>
+<h1>Sign up!</h1>
 <%= flash[:error] %>
 <br>
 
-<form action="/session" method="POST">
+<form action="/users" method="POST">
   <input
     type="hidden"
     name="authenticity_token"
@@ -18,8 +18,5 @@
   </label>
   <br>
 
-  <input type="submit" value="Log in!">
-
+  <input type="submit" value="Create your account!">
 </form>
-
-<p><%= link_to "Create a new account", new_user_url, method: :get %></p>

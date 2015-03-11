@@ -1,10 +1,15 @@
 <% form_action = cat.persisted? ? cat_url(cat) : cats_url %>
 
 <form action="<%= form_action %>" method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">  
+
   <% if cat.persisted? %>
     <input type="hidden" name="_method" value="PATCH">
   <% end %>
-  
+
   <label for="cat_name">Name of Cat
     <input name="cat[name]" id="cat_name" type="text" value="<%= cat.name %>">
   </label>

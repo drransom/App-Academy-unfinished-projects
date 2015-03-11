@@ -1,24 +1,29 @@
 class UsersController < ApplicationController
   def new
-    @user = User.new
-    render :new
+    if current_user
+      redirect_to cats_url
+    else
+      @user = User.new
+      render :new
+    end
   end
 
-  def index
-    @users = User.all
-    render :index
-  end
-
-  def show
-    @user = User.find(params[:id])
-    render :show
-  end
+  # def index
+  #   @users = User.all
+  #   render :index
+  # end
+  #
+  # def show
+  #   @user = User.find(params[:id])
+  #   render :show
+  # end
 
   def create
     @user = User.new(user_params)
     if @user.save
-      render :show
+      login_user!(@user)
     else
+      flash[:error] = "invalid username or password"
       render :new
     end
   end
