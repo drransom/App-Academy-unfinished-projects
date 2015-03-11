@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   # get 'user/session_token:string'
 
   root to: 'cats#index'
-  resources :cats, only: [:index, :create, :new, :show, :update, :edit, :destroy]
+  resources :cats
   resources :cat_rental_requests
   resources :users
+  resource :session
 end

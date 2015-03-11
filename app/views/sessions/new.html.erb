@@ -1,0 +1,17 @@
+<h1>Log in!</h1>
+<%= flash[:error] %>
+<br>
+
+<form action="/session" method="POST">
+  <label>Username
+    <input type="text" name="user[username]">
+  </label>
+  <br>
+
+  <label>Password
+    <input type="password" name="user[password]">
+  </label>
+  <br>
+
+  <input type="submit" value="Log in!">
+</form>
