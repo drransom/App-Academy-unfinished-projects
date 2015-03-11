@@ -13,6 +13,17 @@
 
 class CatRentalRequest < ActiveRecord::Base
   belongs_to :cat
+  belongs_to(
+    :requestor,
+    class_name: 'User',
+    primary_key: :id,
+    foreign_key: :requestor_id
+  )
+  has_one(
+    :cat_owner,
+    through: :cat,
+    source: :user
+  )
 
   def sibling_requests
     cat.cat_rental_requests.where.not(id: self.id)
@@ -31,13 +42,17 @@ class CatRentalRequest < ActiveRecord::Base
       self.status = "APPROVED"
       self.save
       sibling_requests.each do |sibling|
-        if sibling.status == "PENDING" && overlapping_request?(sibling)
+        if overlapping_request?(sibling)
           sibling.status = "DENIED"
           sibling.save
         end
-        all.update()
       end
     end
+  end
+
+  def deny!
+    self.status = "DENIED"
+    self.save
   end
 
   # def overlapping_sibling_requests

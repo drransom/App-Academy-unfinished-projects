@@ -7,6 +7,8 @@
 </head>
 <body>
 
+<%= flash[:error] %>
+
 <% if current_user %>
   <h1>Welcome, <%= current_user.username %>!</h1>
   <p><%= link_to "Logout", session_url, method: :delete %></p>

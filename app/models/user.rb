@@ -14,13 +14,25 @@ class User < ActiveRecord::Base
 
   validates :password_digest, presence: true
   validates :username, :session_token, presence: true, uniqueness: true
+  has_many :cats
+  has_many(
+    :requested_rentals,
+    class_name: 'CatRentalRequest',
+    primary_key: :id,
+    foreign_key: :requestor_id
+  )
+  has_many(
+    :requests_on_owned_cat,
+    through: :cats,
+    source: :cat_rental_requests
+  )
 
   after_initialize do
     reset_session_token! unless session_token
   end
 
   def reset_session_token!
-    self.update(session_token: SecureRandom::base64)    
+    self.update(session_token: SecureRandom::base64)
   end
 
   def password=(password)

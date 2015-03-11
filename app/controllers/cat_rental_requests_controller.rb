@@ -7,6 +7,7 @@ class CatRentalRequestsController < ApplicationController
 
   def create
     @cat_rental_request = CatRentalRequest.new(cat_rental_request_params)
+    @cat_rental_request.requestor_id = current_user.id
     @cats = Cat.all
     if @cat_rental_request.save
       redirect_to cat_url(@cat_rental_request.cat)
@@ -33,6 +34,28 @@ class CatRentalRequestsController < ApplicationController
     @cat_rental_request = CatRentalRequest.find(params[:id])
     @cat_rental_request.destroy
     index
+  end
+
+  def deny
+    @cat_rental_request = CatRentalRequest.find(params[:id])
+    if @cat_rental_request.cat_owner == current_user
+      @cat_rental_request.deny!
+    else
+      flash[:error] = "You do not own this cat!"
+    end
+
+    redirect_to cat_url(@cat_rental_request.cat)
+  end
+
+  def approve
+    @cat_rental_request = CatRentalRequest.find(params[:id])
+    if @cat_rental_request.cat_owner == current_user
+      @cat_rental_request.approve!
+    else
+      flash[:error] = "You do not own this cat!"
+    end
+
+    redirect_to cat_url(@cat_rental_request.cat)
   end
 
   private

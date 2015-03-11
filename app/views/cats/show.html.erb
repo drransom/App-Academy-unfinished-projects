@@ -14,10 +14,18 @@
 <ul>
   <% @cat.cat_rental_requests.order(:start_date).each do |crr| %>
     <li>Start date: <%= crr.start_date %> End Date: <%= crr.end_date %>
-      Status: <%= crr.status %></li>
+      Status: <%= crr.status %>
+      Requested by: <%= crr.requestor.username %>
+      <% if crr.cat_owner == current_user %>
+        <%= button_to "Approve Rental Request", approve_cat_rental_request_url(crr), method: :get %>
+        <%= button_to "Deny Request", deny_cat_rental_request_url(crr), method: :get %>
+      <% end %>
+      </li>
   <% end %>
 
 <br>
-<%= link_to "Change this cat", edit_cat_url %>
+<%= link_to "Change this cat", edit_cat_url(@cat) %>
 <br>
 <%= link_to "Destroy cat", cat_url(@cat), method: :delete %>
+<br>
+<%= link_to "Back to cats index", cats_url %>
