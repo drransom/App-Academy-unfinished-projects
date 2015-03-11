@@ -37,10 +37,15 @@ class CatsController < ApplicationController
     end
   end
 
+  def destroy
+    @cat = Cat.find(params[:id])
+    @cat.destroy
+    index
+  end
+
   private
 
   def cat_params
     params.require(:cat).permit(:age, :sex, :description, :birth_date, :color, :name)
   end
-
 end

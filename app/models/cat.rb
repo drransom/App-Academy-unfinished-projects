@@ -13,6 +13,8 @@
 class Cat < ActiveRecord::Base
   COLORS = ["orange", "brown", "red", "white", "green",
             "black", "gray"]
+            
+  has_many :cat_rental_requests, dependent: :destroy
 
   validates :birth_date, :name, presence: true
   validates :color, inclusion: COLORS

@@ -9,4 +9,15 @@
   <% end %>
 </table>
 <br>
+
+<h2>Rental Requests for <%= @cat.name %></h2>
+<ul>
+  <% @cat.cat_rental_requests.order(:start_date).each do |crr| %>
+    <li>Start date: <%= crr.start_date %> End Date: <%= crr.end_date %>
+      Status: <%= crr.status %></li>
+  <% end %>
+
+<br>
 <%= link_to "Change this cat", edit_cat_url %>
+<br>
+<%= link_to "Destroy cat", cat_url(@cat), method: :delete %>
