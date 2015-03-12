@@ -1,0 +1,9 @@
+<% if logged_in? %>
+  <h3>Logged in as: <%= current_user.email %></h3>
+  <%= button_to 'Log Out', sessions_url, method: :delete %>
+<% else %>
+  <%= link_to 'Sign In', sessions_url %>
+  <%= link_to 'Sign Up', users_url %>
+<% end %><br>
+
+<%= flash[:errors] %>
