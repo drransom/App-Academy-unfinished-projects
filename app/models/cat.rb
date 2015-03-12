@@ -8,6 +8,7 @@
 #  sex         :string           not null
 #  description :text
 #  birth_date  :date
+#  user_id     :integer
 #
 
 class Cat < ActiveRecord::Base
