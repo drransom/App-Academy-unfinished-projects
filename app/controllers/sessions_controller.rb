@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    current_login.reset_session_token!
+    current_login.destroy
     session[:session_token] = nil
     redirect_to cats_url
   end
