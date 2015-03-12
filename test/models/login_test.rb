@@ -7,6 +7,10 @@
 #  user_id       :integer          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  ip_address    :string
+#  machine_type  :string
+#  latitude      :integer
+#  longitude     :integer
 #
 
 require 'test_helper'

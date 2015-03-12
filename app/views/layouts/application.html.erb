@@ -6,16 +6,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
 <%= flash[:error] %>
-
-<% if current_user %>
-  <h1>Welcome, <%= current_user.username %>!</h1>
-  <p><%= link_to "Logout", session_url, method: :delete %></p>
-<% else %>
-  <p><%= link_to "Login/Sign up", new_session_url, method: :get %></p>
-<% end %>
-<br>
+<%= render 'header' %>
 
 <%= yield %>
 
