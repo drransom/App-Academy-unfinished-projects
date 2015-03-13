@@ -4,7 +4,7 @@
   <% if post.persisted? %>
     <input type="hidden" name="_method" value="PATCH">
   <% else %>
-    <input type="hidden" name="post[sub_id]" value="<%= sub.id %>">
+    <!-- <input type="hidden" name="post[sub_id]" value="<%= sub.id %>"> -->
   <% end %>
 
   <%= csrf_input %>
@@ -12,5 +12,10 @@
   <label>Title<input type="text" value="<%= post.title %>" name="post[title]"></label><br>
   <label>URL<input type="text" value="<%= post.url %>" name="post[url]"></label><br>
   <label>Content<textarea name="post[content]"><%= post.content %></textarea></label><br>
+
+  <h3>Subs</h3>
+  <% all_subs.each do |sub| %>
+    <div><label ><%= check_box("post", "sub_ids", { multiple: true }, sub.id, nil) %><%= sub.title %></label></div>
+  <% end %>
   <input type="submit" value="Submit my post!">
 </form>

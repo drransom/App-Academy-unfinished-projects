@@ -2,7 +2,7 @@
 
 <%= @post.to_json %>
 <h2>Links</h2>
-<div><%= link_to @post.sub.title, sub_url(@post.sub) %></div>
+<div><%#= link_to @post.sub.title, sub_url(@post.sub) %></div>
 
 
 <% if current_user && current_user.id == @post.author_id %>
