@@ -35,6 +35,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @all_comments = @post.comments.order(created_at: :desc)
     render :show
   end
 

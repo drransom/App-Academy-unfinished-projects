@@ -1,6 +1,9 @@
 <ul>
-    <li><%= comment.content %> <%= link_to "(Reply)", comment_url(comment) %></li>
-  <% comment.child_comments.each do |child| %>
-    <%= render 'comment', comment: child %>
+    <li><%= comment.content %><br>
+      Author: <%= comment.author.user_name %><br>
+      Created at: <%= comment.created_at %><br>
+      <%= link_to "Reply", comment_url(comment) %></li>
+  <% children_of(comment.id, all_comments).each do |child| %>
+    <%= render 'comment', comment: child, all_comments: all_comments %>
   <% end %>
 </ul>

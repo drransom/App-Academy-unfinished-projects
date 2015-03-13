@@ -2,8 +2,8 @@
 
 <%= @post.to_json %>
 <h2>Comments</h2>
-<% @post.comments.where(parent_comment_id: nil).each do |comment| %>
-  <div><%= render 'comment', comment: comment %></div>
+<% children_of(nil, @all_comments).each do |comment| %>
+  <div><%= render 'comment', comment: comment, all_comments: @all_comments %></div>
 <% end %>
 
 <h2>Subs</h2>
