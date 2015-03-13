@@ -3,7 +3,7 @@
 <%= @post.to_json %>
 <h2>Comments</h2>
 <% @post.comments.where(parent_comment_id: nil).each do |comment| %>
-  <div><%= comment.content %></div>
+  <div><%= render 'comment', comment: comment %></div>
 <% end %>
 
 <h2>Subs</h2>
