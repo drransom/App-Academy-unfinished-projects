@@ -23,6 +23,9 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user!
-    redirect_to new_session_url unless logged_in?
+    unless logged_in?
+      flash[:errors] = "You must log in first."
+      redirect_to new_sessions_url
+    end
   end
 end
