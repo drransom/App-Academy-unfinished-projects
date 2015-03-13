@@ -1,10 +1,20 @@
 <h1><%= @post.title %></h1>
 
 <%= @post.to_json %>
+<h2>Comments</h2>
+<% @post.comments.where(parent_comment_id: nil).each do |comment| %>
+  <div><%= comment.content %></div>
+<% end %>
+
+<h2>Subs</h2>
+<% @post.subs.each do |sub| %>
+  <div><%= link_to sub.title, sub_url(sub) %></div>
+<% end %>
+
 <h2>Links</h2>
-<div><%#= link_to @post.sub.title, sub_url(@post.sub) %></div>
-
-
-<% if current_user && current_user.id == @post.author_id %>
-  <div><%= link_to 'Edit Post', edit_post_url(@post) %></div>
+<% if current_user %>
+  <%= link_to "Add a new comment!", new_post_comment_url(@post) %>
+  <% if current_user.id == @post.author_id %>
+    <div><%= link_to 'Edit Post', edit_post_url(@post) %></div>
+  <% end %>
 <% end %>

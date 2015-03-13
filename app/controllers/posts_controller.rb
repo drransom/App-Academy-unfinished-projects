@@ -13,8 +13,8 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to post_url(@post)
     else
-      flash[:errors] = @post.errors.full_messages
-      redirect_to sub_url(@post.sub_id)
+      flash.now[:errors] = @post.errors.full_messages
+      render :new
     end
   end
 

@@ -6,7 +6,6 @@
 #  title      :string           not null
 #  url        :string
 #  content    :text
-#  sub_id     :integer          not null
 #  author_id  :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -20,6 +19,7 @@ class Post < ActiveRecord::Base
   has_many :post_subs, dependent: :destroy
 
   has_many :subs, through: :post_subs, source: :sub
+  has_many :comments
 
   def at_least_one_sub
     if self.subs.empty?
