@@ -1,0 +1,18 @@
+<% if sub.persisted? %>
+  <% action_url = sub_url(sub) %>
+<% else %>
+  <% action_url = subs_url %>
+<% end %>
+
+<form action="<%= action_url %>", method="post">
+  <% if sub.persisted? %>
+    <input
+      type="hidden"
+      name="_method"
+      value="patch">
+  <% end %>
+  <%= csrf_input %>
+  <label>Title<input type="text" name="sub[title]" value="<%= sub.title %>"></label><br>
+  <label>Description<textarea name="sub[description]"><%= sub.description %></textarea></label><br>
+  <input type="submit" value="Submit my sub!">
+</form>

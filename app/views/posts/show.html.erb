@@ -1,0 +1,10 @@
+<h1><%= @post.title %></h1>
+
+<%= @post.to_json %>
+<h2>Links</h2>
+<div><%= link_to @post.sub.title, sub_url(@post.sub) %></div>
+
+
+<% if current_user && current_user.id == @post.author_id %>
+  <div><%= link_to 'Edit Post', edit_post_url(@post) %></div>
+<% end %>

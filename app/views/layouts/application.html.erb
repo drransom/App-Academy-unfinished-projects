@@ -9,10 +9,13 @@
 <body>
   <% if current_user %>
     <%= button_to "Log out", session_url, method: "delete" %>
+  <% else %>
+    <%= link_to 'Sign Up', new_user_url %> or <%= link_to 'Sign In', new_session_url %> 
   <% end %>
 <%= flash[:errors] %>
 
 <%= yield %>
 
+<div><%= link_to "Home", subs_url %></div>
 </body>
 </html>

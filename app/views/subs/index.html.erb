@@ -1,0 +1,9 @@
+<h1>All Subs</h1>
+<% @subs.each do |sub| %>
+  <div>
+    <%= link_to sub.title, sub_url(sub) %>
+  </div>
+<% end %>
+<% if current_user %>
+  <%= link_to "Create a new sub", new_sub_url %>
+<% end %>

@@ -17,6 +17,7 @@ class SubsController < ApplicationController
 
   def create
     @sub = Sub.new(sub_params)
+    @sub.moderator_id = current_user.id
 
     if @sub.save
       redirect_to sub_url(@sub)
@@ -46,8 +47,8 @@ class SubsController < ApplicationController
 
   def is_moderator
     sub = Sub.find(params[:id])
-    unless sub.moderator_id == current_user.id
-      flash.now[:errors] = "You are not the moderator of this sub"
+    unless sub && current_user && sub.moderator_id == current_user.id
+      flash[:errors] = "You are not the moderator of this sub"
       redirect_to sub_url(sub)
     end
   end
