@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
   has_many :posts, dependent: :destroy
-  
+  has_many :votes, foreign_key: :voter_id
+
   attr_reader :password
 
   def self.find_by_credentials(user_name, password)

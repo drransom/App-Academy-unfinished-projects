@@ -12,6 +12,8 @@
 #
 
 class Post < ActiveRecord::Base
+  include Votable
+  
   validates :title, :author, presence: true
   validate :at_least_one_sub
 
@@ -20,6 +22,7 @@ class Post < ActiveRecord::Base
 
   has_many :subs, through: :post_subs, source: :sub
   has_many :comments
+  has_many :votes, as: :votable
 
   def self.children_of(comment_id, comment_array)
     #returns all comments in comment_array with parent_id == comment_id.

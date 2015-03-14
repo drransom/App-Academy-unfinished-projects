@@ -1,4 +1,8 @@
+require
+
 class PostsController < ApplicationController
+  include Votable
+
   before_action :require_logged_in, except: [:show]
   def new
     @sub = Sub.find(params[:sub_id])
