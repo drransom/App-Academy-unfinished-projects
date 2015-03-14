@@ -2,7 +2,7 @@
 
 <%= @post.to_json %>
 <h2>Comments</h2>
-<% children_of(nil, @all_comments).each do |comment| %>
+<% @all_comments[nil].each do |comment| %>
   <div><%= render 'comment', comment: comment, all_comments: @all_comments %></div>
 <% end %>
 
