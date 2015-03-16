@@ -7,11 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if current_user %>
-    <%= button_to "Log out", session_url, method: "delete" %>
-  <% else %>
-    <%= link_to 'Sign Up', new_user_url %> or <%= link_to 'Sign In', new_session_url %> 
-  <% end %>
+  <ul class="nav nav-tabs">
+    <% if current_user %>
+      <li role ="presentation" class="active"><%= link_to "Log Out", session_url, method: "delete" %></a></li>
+    <% else %>
+      <li role="presentation" class="active"><%= link_to "Sign In", new_session_url %></a></li>
+      <li role="presentation" class="active"><%= link_to "Sign Up", new_user_url %></a></li>
+    <% end %>
+  </ul>
 <%= flash[:errors] %>
 
 <%= yield %>
