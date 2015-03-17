@@ -33,6 +33,12 @@ feature "comments on users" do
     expect(page).to have_content("Body can't be blank")
   end
 
+  it "shows the author's name next to each comment" do
+    fill_in('Add a comment', with: 'I have a comment')
+    click_on('Submit comment')
+    expect(page).to have_content("added by bobby")
+  end
+
   it "users should be able to view other users' comments" do
     fill_in('Add a comment', with: 'I have a comment')
     click_on('Submit comment')
@@ -67,6 +73,12 @@ feature "comments on goals" do
     fill_in('Add a comment', with: '')
     click_on('Submit comment')
     expect(page).to have_content("Body can't be blank")
+  end
+
+  it "shows the author's name next to each comment" do
+    fill_in('Add a comment', with: 'I have a comment')
+    click_on('Submit comment')
+    expect(page).to have_content("added by bobby")
   end
 
   it "users should be able to view other users' comments" do
