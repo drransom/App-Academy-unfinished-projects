@@ -1,5 +1,5 @@
 <li>
-  <%= goal.content %><br>
+  <%= link_to goal.content, goal_url(goal) %><br>
   <% if goal.user == current_user %>
     <% if goal.completed_on %>
       completed on <%= goal.completed_on %>

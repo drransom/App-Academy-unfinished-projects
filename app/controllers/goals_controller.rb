@@ -1,4 +1,7 @@
 class GoalsController < ApplicationController
+  before_action :view_permitted, only: [:show]
+  before_action :modify_allowed, only: [:edit, :update, :destroy]
+  
   def new
   end
 
@@ -27,6 +30,11 @@ class GoalsController < ApplicationController
     end
   end
 
+  def show
+    @goal = Goal.find(params[:id])
+    render :show
+  end
+
   def complete
     @goal = Goal.find(params[:id])
     @goal.update(completed_on: Date.today)
@@ -42,4 +50,20 @@ class GoalsController < ApplicationController
   def goal_params
     params.require(:goal).permit(:user_id, :content, :private)
   end
+
+  private
+  def view_permitted
+    @goal = Goal.find(params[:id])
+    if @goal.private && current_user != @goal.user
+      redirect_to user_url(current_user)
+    end
+  end
+
+  def modify_allowed
+    @goal = Goal.find(params[:id])
+    if current_user != @goal.user
+      redirect_to user_url(current_user)
+    end
+  end
+
 end

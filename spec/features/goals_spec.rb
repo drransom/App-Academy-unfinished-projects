@@ -61,19 +61,52 @@ feature "viewing goals" do
                                 content: "You can see this")
   end
 
-  it "users can't see other users' private goals" do
-    bob2 = create_user("bob2")
-    sign_in(bob2)
-    visit user_url(@bob)
-    expect(page).to have_content(@public_goal.content)
-    expect(page).to_not have_content(@private_goal.content)
+  feature "from the user page" do
+    it "users can't see other users' private goals" do
+      bob2 = create_user("bob2")
+      sign_in(bob2)
+      visit user_url(@bob)
+      expect(page).to have_content(@public_goal.content)
+      expect(page).to_not have_content(@private_goal.content)
+    end
+
+    it "users can see their own private goals" do
+      sign_in(@bob)
+      visit user_url(@bob)
+      expect(page).to have_content(@public_goal.content)
+      expect(page).to have_content(@private_goal.content)
+    end
+
+    it "has link to goal show page" do
+      sign_in(@bob)
+      visit user_url(@bob)
+      expect(page).to have_link(@private_goal.content)
+      expect(page).to have_link(@public_goal.content)
+    end
   end
 
-  it "users can see their own private goals" do
-    sign_in(@bob)
-    visit user_url(@bob)
-    expect(page).to have_content(@public_goal.content)
-    expect(page).to have_content(@private_goal.content)
+  feature "from the goal show page" do
+    it "shows goal details" do
+      sign_in(@bob)
+      visit goal_url(@private_goal)
+      expect(page).to have_content(@private_goal.content)
+      expect(page).to have_content("in progress")
+      expect(page).to_not have_content("completed on")
+    end
+
+    it "shows completion details of completed goals" do
+      sign_in(@bob)
+      @private_goal.update(completed_on: Date.yesterday)
+      visit goal_url(@private_goal)
+      expect(page).to have_content("completed on")
+    end
+  end
+
+  it "users cannot see others users private goals" do
+    bobby = create_user("bobby")
+    sign_in(bobby)
+    visit goal_url(@private_goal)
+    expect(page).to have_content("bobby's Page")
   end
 
 end
