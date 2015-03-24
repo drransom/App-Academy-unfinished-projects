@@ -1,1 +1,39 @@
 /* PHASE 3: Layout */
+.content {
+  width: 900px;
+  min-height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #fff;
+  border-bottom: 1px solid #aaa;
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  position: relative;
+}
+
+
+.content-sidebar {
+  width: 200px;
+  min-height: 160px;
+  padding: 20px;
+  float: left;
+  /* border-right: 1px solid #aaa; */
+}
+
+.content-main {
+  min-height: 160px;
+  width: 619px;
+  padding: 20px;
+  float: right;
+}
+
+.content::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 1px;
+  left: 240px;
+  top: 0;
+  bottom: 0;
+  background: #aaa;
+}
