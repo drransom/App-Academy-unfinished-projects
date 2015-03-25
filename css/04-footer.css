@@ -1,1 +1,49 @@
 /* PHASE 4: Footer */
+
+.footer {
+  position: relative;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.footer-nav {
+  background: #fff;
+  width: 900px;
+  /* height: 50px; */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+/*   background-color: black; */
+  border-bottom: 1px solid #aaa;
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.footer a {
+  display: inline-block;
+}
+
+.footer-trademark {
+  display: block;
+  float: left;
+  padding: 20px;
+/*   background-color: blue; */
+
+}
+
+.footer-list {
+  float: right;
+/*   background-color: green; */
+}
+
+.footer-list li {
+  margin: 20px;
+  float: left;
+}
+
+.footer-list li:hover {
+  color: #000;
+}
