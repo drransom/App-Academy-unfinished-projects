@@ -1,1 +1,19 @@
 /* PHASE 5: Cats */
+.content-header {
+  position: relative;
+  height: 200px;
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  background: url("../cats.jpg");
+  background-size: cover;
+}
+
+.content-header-title {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 36px;
+  left: 240px;
+  color: #fff;
+  font-size: 36px;
+}

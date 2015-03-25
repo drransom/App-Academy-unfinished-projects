@@ -1,7 +1,7 @@
 /* PHASE 3: Layout */
 .content {
   width: 900px;
-  min-height: 200px;
+  min-height: 400px;
   margin-left: auto;
   margin-right: auto;
   background: #fff;
@@ -14,14 +14,12 @@
 
 .content-sidebar {
   width: 200px;
-  min-height: 160px;
   padding: 20px;
   float: left;
   /* border-right: 1px solid #aaa; */
 }
 
 .content-main {
-  min-height: 160px;
   width: 619px;
   padding: 20px;
   float: right;
@@ -33,7 +31,7 @@
   position: absolute;
   width: 1px;
   left: 240px;
-  top: 0;
+  top: 200px;
   bottom: 0;
   background: #aaa;
 }
