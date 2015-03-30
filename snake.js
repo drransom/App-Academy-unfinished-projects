@@ -3,10 +3,12 @@
     window.Game = {};
   }
 
-  var Snake = Game.Snake = function (boardSize) {
+  var Snake = Game.Snake = function (board) {
     this.dir = [0, 1];
     this.segments = this.createSegments();
-    this.boardSize = boardSize;
+    this.board = board;
+    this.boardSize = this.board.size;
+    this.max_size = this.segments.length;
   };
 
   Snake.prototype.createSegments = function () {
@@ -16,12 +18,16 @@
   Snake.prototype.move = function () {
     var newHeadPos = this.findNewHead();
     this.createHead(newHeadPos);
-    this.destroyTail();
+    if (this.board.isApple(newHeadPos)) {
+      this.grow();
+    }
+    if (this.segments.length > this.max_size) {
+      this.destroyTail();
+    }
   };
 
   Snake.prototype.findNewHead = function () {
-    var head = this.segments[0];
-    return head.plus(this.dir);
+    return this.head().plus(this.dir);
   };
 
   Snake.prototype.wrap = function (arr) {
@@ -45,17 +51,30 @@
   };
 
   Snake.prototype.selfCollide = function () {
-    var head = this.segments[0];
+    head = this.head();
     return this.segments.slice(1).some(function (segment) {
       return (segment.xCoord === head.xCoord && segment.yCoord === head.yCoord);
     });
   };
 
   Snake.prototype.offBoard = function () {
-    var head = this.segments[0];
-    return head.xCoord < 0 || head.yCoord < 0 ||
-      head.xCoord >= this.boardSize[0] || head.yCoord >= this.boardSize[1];
+    return this.head().xCoord < 0 ||
+           this.head().yCoord < 0 ||
+           this.head().xCoord >= this.boardSize[0] ||
+           this.head().yCoord >= this.boardSize[1];
   };
+
+  Snake.prototype.eatDeathApple = function () {
+    return this.board.isDeathApple([this.head().xCoord, this.head().yCoord]);
+  }
+
+  Snake.prototype.grow = function () {
+    this.max_size += 3;
+  };
+
+  Snake.prototype.head = function () {
+    return this.segments[0];
+  }
 
 
 

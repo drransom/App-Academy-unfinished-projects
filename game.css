@@ -33,14 +33,16 @@ li {
   height: 20px;
 }
 
-
-
 .snake {
   background-color: green;
 }
 
 .apple {
   background-color: red;
+}
+
+.death-apple {
+  background-color: black;
 }
 
 .unoccupied {

@@ -37,10 +37,14 @@
     } else {
       this.renderView(this.constructBoard());
     }
+    this.spawnApples(0.1);
   };
 
   View.prototype.gameOver = function () {
-    this.renderView(this.board.renderGameOver());
+    $board = this.constructBoard();
+    $board.prepend('<h1>YOU LOSE</h1>')
+    this.renderView($board);
+
     clearInterval(this.intervalId);
   };
 
@@ -52,7 +56,7 @@
 
   View.prototype.playGame = function () {
     var view = this;
-    this.intervalId = window.setInterval(view.step.bind(view), 1000);
+    this.intervalId = window.setInterval(view.step.bind(view), 500);
   };
 
   View.prototype.constructBoard = function () {
@@ -69,6 +73,14 @@
       $board.append($row);
     }
     return $board;
+  }
+
+  View.prototype.spawnApples = function (pct) {
+    if (Math.random() < pct) {
+      this.board.spawnApple();
+    } else if (Math.random() < 0.5) {
+      this.board.spawnDeathApple();
+    }
   }
 
 })();
