@@ -21,7 +21,7 @@
 
   Snake.prototype.findNewHead = function () {
     var head = this.segments[0];
-    return this.wrap(head.plus(this.dir));
+    return head.plus(this.dir);
   };
 
   Snake.prototype.wrap = function (arr) {
@@ -44,11 +44,17 @@
     })
   };
 
-  Snake.prototype.selfCollide = function (pos) {
+  Snake.prototype.selfCollide = function () {
     var head = this.segments[0];
     return this.segments.slice(1).some(function (segment) {
       return (segment.xCoord === head.xCoord && segment.yCoord === head.yCoord);
     });
+  };
+
+  Snake.prototype.offBoard = function () {
+    var head = this.segments[0];
+    return head.xCoord < 0 || head.yCoord < 0 ||
+      head.xCoord >= this.boardSize[0] || head.yCoord >= this.boardSize[1];
   };
 
 
@@ -81,5 +87,11 @@
     this.xCoord = newPos[0];
     this.yCoord = newPos[1];
   };
+
+  Coord.coordArrIncludes = function (cordArr, pos) {
+    return cordArr.some (function (element) {
+      return element.xCoord === pos[0] && element.yCoord === pos[1];
+    });
+  }
 
 })();

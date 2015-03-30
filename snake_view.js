@@ -5,8 +5,9 @@
 
   var View = Game.View = function (el, size) {
     if (!size) {
-      size = [10, 10];
+      size = [20, 20];
     }
+    this.size = size
     this.$el = $(el);
     this.board = new Game.Board(size);
     this.bindHandlers();
@@ -31,14 +32,43 @@
 
   View.prototype.step = function () {
     this.board.snake.move();
-    var boardContents = this.board.render();
+    if (this.board.gameIsOver()) {
+      this.gameOver();
+    } else {
+      this.renderView(this.constructBoard());
+    }
+  };
+
+  View.prototype.gameOver = function () {
+    this.renderView(this.board.renderGameOver());
+    clearInterval(this.intervalId);
+  };
+
+  View.prototype.renderView = function (boardContents) {
     this.$el.empty();
     this.$el.append(boardContents);
-  };
+  }
+
 
   View.prototype.playGame = function () {
     var view = this;
-    window.setInterval(view.step.bind(view), 1000);
+    this.intervalId = window.setInterval(view.step.bind(view), 1000);
   };
+
+  View.prototype.constructBoard = function () {
+    var $board = $('<ul></ul>')
+    $board.addClass('board')
+    for (var i = 0; i < this.size[0]; i++) {
+      var $row = $('<ul></ul>');
+      for (var j = 0; j < this.size[1]; j++) {
+        var $grid_element = $('<li></li>')
+        $grid_element.data("position", [i, j]);
+        $grid_element.addClass(this.board.contents([i, j])).addClass("snake-grid");
+        $row.append($grid_element);
+      }
+      $board.append($row);
+    }
+    return $board;
+  }
 
 })();

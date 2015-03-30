@@ -24,13 +24,29 @@
     return output;
   };
 
+  Board.prototype.renderGameOver = function () {
+    return this.render() + "YOU LOSE";
+  }
+
   Board.prototype.emptyPos = function (pos) {
     return !(this.snake.includesPos(pos) || this.apples.some(function(apple) {
       (apple[0] === pos[0] && apple[1] === pos[1])
     }));
   };
 
-  Board.prototype.gameIsOver = function ()
+  Board.prototype.gameIsOver = function () {
+    return (this.snake.selfCollide() || this.snake.offBoard());
+  };
+
+  Board.prototype.contents = function (pos) {
+    if (this.snake.includesPos(pos)) {
+      return "snake";
+    } else if (Game.Coord.coordArrIncludes(this.apples, pos)) {
+      return "apple";
+    } else {
+      return "unoccupied";
+    };
+  }
 
 
 })();
