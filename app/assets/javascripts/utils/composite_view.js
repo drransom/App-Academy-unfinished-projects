@@ -1,3 +1,5 @@
+"use strict";
+
 Backbone.CompositeView = Backbone.View.extend({
   addSubview: function (selector, subview) {
     this.subviews(selector).push(subview);
