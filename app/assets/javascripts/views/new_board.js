@@ -2,6 +2,7 @@
 
 TrelloClone.Views.NewBoard = Backbone.View.extend({
   template: JST['new_board'],
+  errorTemplate: JST['errors'],
   tagName: 'section',
   className: 'new-post',
 
@@ -28,14 +29,18 @@ TrelloClone.Views.NewBoard = Backbone.View.extend({
     var newBoard = new TrelloClone.Models.Board(board_data);
     newBoard.save({}, {
       success: function () {
-        debugger;
         this.collection.add(newBoard);
-        this.createButton();
-        console.log("success!")
       }.bind(this),
-      error: function (response) {
-        // somehow display JSON of serrors
-      }
+      error: function (model, response) {
+        debugger;
+        this.newBoardForm(event);
+        var formArea = $('form.new-board');
+        var errors = _.filter(response.responseText.split(/\[|]|"|,/),
+          function (elem) { return elem }
+        );
+        var errForm = this.errorTemplate({ errors: errors });
+        formArea.prepend(response)
+      }.bind(this)
     });
     this.createButton();
   },
