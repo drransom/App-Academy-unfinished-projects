@@ -1,0 +1,7 @@
+
+<h2>All feeds</h2>
+<ul class="boards-index">
+  <% boards.each( function (board) { %>
+    <li class="board-index-item"><a class="btn btn-xlarge" href="#"><%= board.escape("title") %></a></li>
+  <% }); %>
+</ul>

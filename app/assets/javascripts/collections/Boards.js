@@ -1,7 +1,9 @@
 "use strict";
 
-TrelloClone.Collections.Board = Backbone.Collection.extend({
+TrelloClone.Collections.Boards = Backbone.Collection.extend({
   model: TrelloClone.Models.Board,
+
+  url: '/api/boards',
 
   initialize: function (options) {
   },

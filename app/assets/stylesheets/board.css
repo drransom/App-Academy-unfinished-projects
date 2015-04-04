@@ -1,0 +1,21 @@
+.btn-xlarge {
+    padding: 18px 28px;
+    font-size: 22px;
+    line-height: normal;
+    background-color: #0E74AF;
+    color: #fff;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+            border: 1px solid black;
+
+}
+
+.btn-xlarge:hover {
+  color: #fff;
+  background-color: darkblue;
+}
+
+ul.boards-index {
+  list-style-type: none;
+}

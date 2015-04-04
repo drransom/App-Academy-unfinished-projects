@@ -6,9 +6,8 @@ window.TrelloClone = {
   Views: {},
   Routers: {},
   initialize: function() {
+  var collection = new TrelloClone.Collections.Boards();
+    new TrelloClone.Routers.Router(collection, $('body'));
+    Backbone.history.start();
   }
 };
-
-$(document).ready(function(){
-  TrelloClone.initialize();
-});

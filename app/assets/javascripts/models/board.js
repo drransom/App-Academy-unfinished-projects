@@ -1,4 +1,4 @@
-"use strict";
+"use strict"
 
 TrelloClone.Models.Board = Backbone.Model.extend ({
   url: 'api/boards',
