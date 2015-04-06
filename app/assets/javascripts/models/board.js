@@ -1,7 +1,7 @@
 "use strict"
 
 TrelloClone.Models.Board = Backbone.Model.extend ({
-  url: 'api/boards',
+  urlRoot: 'api/boards',
 
   initialize: function (options) {
     this.title = options.title;
