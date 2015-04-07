@@ -16,7 +16,6 @@ TrelloClone.Views.NewBoard = Backbone.View.extend({
   },
 
   newBoardForm: function (event) {
-    debugger
     event.preventDefault();
     this.$el.empty();
     var content = this.template();
@@ -24,6 +23,7 @@ TrelloClone.Views.NewBoard = Backbone.View.extend({
   },
 
   createBoard: function (event) {
+    debugger
     event.preventDefault();
     var board_data = $('form.new-board').serializeJSON();
     var newBoard = new TrelloClone.Models.Board(board_data);
@@ -46,7 +46,6 @@ TrelloClone.Views.NewBoard = Backbone.View.extend({
   },
 
   createButton: function () {
-    debugger
     // this.$el.empty();
     this.$el.append($("<div class='col-md-3'>" +
       "<a class='btn btn-xlarge btn-block new-board'>New Board" +

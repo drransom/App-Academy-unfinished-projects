@@ -11,7 +11,6 @@ TrelloClone.Views.BoardsIndex = Backbone.View.extend ({
 
   render: function () {
     this.$el.html(this.template({ boards: this.collection }));
-    debugger
     var boardForm = new TrelloClone.Views.NewBoard({ collection: this.collection });
     $('.boards-index').append(boardForm.render().$el);
     return this;
