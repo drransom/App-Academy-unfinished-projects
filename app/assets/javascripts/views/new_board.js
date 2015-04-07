@@ -6,7 +6,7 @@ TrelloClone.Views.NewBoard = Backbone.View.extend({
   className: 'new-post',
 
   events: {
-    'click button.new-board' : 'newBoardForm',
+    'click .new-board' : 'newBoardForm',
     'submit' : 'createBoard'
   },
 
@@ -16,6 +16,7 @@ TrelloClone.Views.NewBoard = Backbone.View.extend({
   },
 
   newBoardForm: function (event) {
+    debugger
     event.preventDefault();
     this.$el.empty();
     var content = this.template();
@@ -29,6 +30,7 @@ TrelloClone.Views.NewBoard = Backbone.View.extend({
     newBoard.save({}, {
       success: function () {
         this.collection.add(newBoard);
+        Backbone.history.navigate('/boards/' + newBoard.id, { trigger: true })
       }.bind(this),
       error: function (model, response) {
         this.newBoardForm(event);
@@ -44,7 +46,10 @@ TrelloClone.Views.NewBoard = Backbone.View.extend({
   },
 
   createButton: function () {
-    $('section.new-post').empty();
-    this.$el.append($("<button class=new-board>Create a new board</button>"));
+    debugger
+    // this.$el.empty();
+    this.$el.append($("<div class='col-md-3'>" +
+      "<a class='btn btn-xlarge btn-block new-board'>New Board" +
+      "</a></div>"));
   }
 })

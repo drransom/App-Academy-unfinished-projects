@@ -10,11 +10,10 @@ TrelloClone.Routers.Router = Backbone.Router.extend({
 
   routes: {
     '': 'index',
-    'api/boards/:id' : 'show'
+    'boards/:id' : 'show'
   },
 
   index: function () {
-    // console.log('in the index');
     this.boards.fetch();
     var view = new TrelloClone.Views.BoardsIndex({
       collection: this.boards
@@ -42,7 +41,7 @@ TrelloClone.Routers.Router = Backbone.Router.extend({
   },
 
   initializeContent: function () {
-    this.$rootEl.append("<section class = 'content'></section>");
+    this.$rootEl.append("<section class = 'content container-fluid'></section>");
     return $('section.content');
   },
 
@@ -51,7 +50,7 @@ TrelloClone.Routers.Router = Backbone.Router.extend({
     if (model) {
       model.fetch();
     } else {
-      model = new collection.model ( { id: id });
+      model = new collection.model( { id: id });
       model.fetch({
         success: function (model, response) {
           collection.add(model, {merge: true})

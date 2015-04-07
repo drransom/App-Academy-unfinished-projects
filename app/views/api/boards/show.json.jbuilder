@@ -9,3 +9,5 @@ json.(@board, :title, :created_at)
 json.user do
   json.email @board.user.email
 end
+
+json.lists @board.lists, :title, :ord

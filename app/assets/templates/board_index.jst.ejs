@@ -1,12 +1,13 @@
 <h2>All feeds</h2>
 <% var board; %>
-<ul class="boards-index">
+<div class="boards-index row">
   <% if (boards.length > 0) { %>
     <% for (var i = 0; i < boards.length; i++) { %>
       <% board = boards.models[i]; %>
-      <li class="board-index-item"><a class="btn btn-xlarge"
-        href="<%= board.url() %>">
-        <%= board.escape("title") %></a></li>
+      <div class="col-md-3"><a class="btn btn-xlarge btn-block"
+        href="<%= '#boards/' + board.id %>">
+        <%= board.escape("title") %>
+      </a></div>
     <% } %>
   <% } %>
-</ul>
+</div>
