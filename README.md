@@ -1,2 +1,4 @@
 # App-Academy-unfinished-projects
-Partially finished projects from App Academy
+This repo contains exercises from App Academy. Many of them are unfinished,
+and I have no particular intention of finishing them. But you're welcome to
+have a look!
