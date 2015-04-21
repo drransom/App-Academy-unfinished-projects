@@ -1,0 +1,46 @@
+.btn-xlarge {
+    padding: 18px 28px;
+    font-size: 22px;
+    line-height: normal;
+    background-color: #0E74AF;
+    color: #fff;
+    margin: 10px 0px 10px 0px;
+    -webkit-border-radius: 0px;
+       -moz-border-radius: 0px;
+            border-radius: 0px;
+            border: 1px solid black;
+
+}
+
+.btn-xlarge:hover {
+  color: #fff;
+  background-color: #0B6294;
+}
+
+.btn.new-board {
+  color: #8c8c8c;
+  background-color: #d6dadc;
+}
+
+ul.boards-index {
+  list-style-type: none;
+}
+
+ul.errors {
+  list-style-type: none;
+}
+
+li.errors-li {
+  color: gray;
+}
+
+.board-background {
+  background: #0E74AF;
+  height: 1000px;
+}
+
+section.content {
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
+}

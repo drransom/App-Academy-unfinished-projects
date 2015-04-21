@@ -1,0 +1,11 @@
+<% var user = board.get('user') %>
+<h2><%= board.get('title') %></h2>
+<% if (lists.length > 0) { %>
+  <ul>
+    <% for (i = 0; i < lists.length; i++) { %>
+      <li><%= lists.models[i].get('title') %></li>
+    <% } %>
+  </ul>
+<% } %>
+
+<button name = "delete">Delete</button>
