@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Snake Game</title>
+    <link rel="stylesheet" type="text/css" href="game.css">
+    <script src="./jquery-2.1.3.js"></script>
+    <script src="./snake.js"></script>
+    <script src="./board.js"></script>
+    <script src="./snake_view.js"></script>
+    <script src="./keymaster-master/keymaster.js"></script>
+  </head>
+  <body>
+    <figure class="board">
+    </figure>
+    <script>
+      $(function () {
+        new Game.View($(".board"));
+      });
+    </script>
+  </body>
+</html>
