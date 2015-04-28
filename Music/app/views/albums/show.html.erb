@@ -1,0 +1,10 @@
+<h1><%= @album.name %> by <%= @album.band.name %></h1><br>
+<%= @album.live ? "Live" : "Studio" %> Album
+<h2>All Tracks</h2><br>
+<% @album.tracks.each do |track| %>
+  <%= link_to track.name, track_url(track) %><br>
+<% end %>
+
+<%= render "edit_destroy", object: "album",
+    edit_url: edit_album_url(@album),
+    delete_url: album_url(@album) %>

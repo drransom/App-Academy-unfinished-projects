@@ -1,0 +1,13 @@
+<h1><%= @track.name %></h1><br>
+<h2>By: <%= link_to @track.band.name, band_url(@track.band) %> on
+        <%= link_to @track.album.name, album_url(@track.album) %></h2><br>
+<% if @track.bonus %>
+  Bonus track!<br>
+<% end %>
+Lyrics:<br>
+<%= @track.lyrics %>
+<br>
+<br>
+<%= render "edit_destroy", object: "track",
+    edit_url: edit_track_url(@track),
+    delete_url: track_url(@track) %>

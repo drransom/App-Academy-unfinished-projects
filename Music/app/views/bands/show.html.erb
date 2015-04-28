@@ -1,0 +1,9 @@
+<h1><%= @band.name %></h1>
+<h2>All Albums</h2>
+<% @band.albums.each do |album| %>
+  <%= link_to album.name, album_url %>
+<% end %>
+
+<%= render "edit_destroy", object: "band",
+    edit_url: edit_band_url(@band),
+    delete_url: band_url(@band) %>
