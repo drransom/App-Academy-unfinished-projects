@@ -1,0 +1,18 @@
+<li>
+  <%= link_to goal.content, goal_url(goal) %><br>
+  <% if goal.user == current_user %>
+    <% if goal.completed_on %>
+      completed on <%= goal.completed_on %>
+    <% else %>
+      <%= button_to 'Mark as completed', complete_goal_url(goal) %>
+    <% end %>
+    <%= link_to 'Edit goal', edit_goal_url(goal) %>
+    <%= button_to 'Delete goal', goal_url(goal), method: :delete, id: "delete_goal_#{goal.id}" %>
+  <% else %>
+    <% if goal.completed_on %>
+      completed on <%= goal.completed_on %>
+    <% else %>
+      in progress
+    <% end %>
+  <% end %>
+</li>

@@ -1,0 +1,18 @@
+<form action="<%= url %>" method="post">
+  <% if goal.persisted? %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+  <%= auth_token %>
+  <label>Goal
+    <input type="text" name="goal[content]" value="<%= goal.content %>">
+  </label><br>
+
+  <label>Privacy
+    <%= radio_button_tag('goal[private]', true, checked = goal.private) %>
+    <%= label_tag(:goal_private_true, "Private goal") %>
+    <%= radio_button_tag('goal[private]', false, checked = !goal.private) %>
+    <%= label_tag(:goal_private_false, "Public goal") %>
+  </label><br>
+
+  <input type="submit" value="<%= button_value %>">
+</form>
