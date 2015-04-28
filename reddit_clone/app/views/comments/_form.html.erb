@@ -1,0 +1,14 @@
+<form class="" action="<%= comments_url%>" method="POST">
+  <%= csrf_input %>
+  <% if params[:post_id] %>
+    <input type="hidden" name="comment[post_id]" value="<%= post.id %>">
+  <% else %>
+    <input type="hidden" name="comment[post_id]" value="<%= parent.post_id %>">
+    <input type="hidden" name="comment[parent_comment_id]" value="<%= parent.id %>">
+  <% end %>
+
+  <label>Content
+    <textarea name="comment[content]"></textarea>
+  </label>
+  <input type="submit" value="Submit">
+</form>

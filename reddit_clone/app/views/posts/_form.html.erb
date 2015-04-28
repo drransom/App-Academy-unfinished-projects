@@ -1,0 +1,19 @@
+<% action_url = post.persisted? ? post_url(post) : posts_url %>
+
+<form action="<%= action_url %>" method="post">
+  <% if post.persisted? %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+
+  <%= csrf_input %>
+
+  <label>Title<input type="text" value="<%= post.title %>" name="post[title]"></label><br>
+  <label>URL<input type="text" value="<%= post.url %>" name="post[url]"></label><br>
+  <label>Content<textarea name="post[content]"><%= post.content %></textarea></label><br>
+
+  <h3>Subs</h3>
+  <% all_subs.each do |sub| %>
+    <div><label ><%= check_box("post", "sub_ids", { multiple: true }, sub.id, nil) %><%= sub.title %></label></div>
+  <% end %>
+  <input type="submit" value="Submit my post!">
+</form>
