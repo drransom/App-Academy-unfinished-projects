@@ -1,0 +1,9 @@
+<% if current_user %>
+  <h1>Welcome, <%= current_user.username %>!</h1>
+  <p><%= link_to "Logout", session_url, method: :delete %></p>
+  <p>You are logged in on your <%= current_login.machine_type %> at <%= current_location %></p>
+  <p>You are also logged in from <%= other_logged_in_machines %></p>
+<% else %>
+  <p><%= link_to "Login/Sign up", new_session_url, method: :get %></p>
+<% end %>
+<br>
